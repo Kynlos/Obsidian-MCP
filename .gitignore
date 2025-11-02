@@ -7,7 +7,9 @@ CodeSnippets/
 
 # Publishing scripts and docs (local only)
 push-to-github.py
+push-to-github.sh
 PUBLISH.md
+RENAME-FILES.txt
 
 # OS files
 .DS_Store

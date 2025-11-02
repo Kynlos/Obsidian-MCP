@@ -29,6 +29,7 @@ Use [Amp](https://ampcode.com/) (Sourcegraph's AI coding assistant) to automatic
 - [Obsidian](https://obsidian.md/) installed
 - [Amp](https://ampcode.com/) installed
 - [Node.js](https://nodejs.org/) v18 or higher
+- [Obsidian MCP Server](https://github.com/Kynlos/Obsidian-MCP) cloned and built locally
 
 ### Installation
 
@@ -51,13 +52,22 @@ chmod +x setup.sh
 
 #### Option 2: Manual Setup
 
-1. **Clone this repository:**
+1. **Clone and build Obsidian MCP Server:**
+   ```bash
+   git clone https://github.com/Kynlos/Obsidian-MCP.git
+   cd Obsidian-MCP
+   npm install
+   npm run build
+   cd ..
+   ```
+
+2. **Clone this repository:**
    ```bash
    git clone https://github.com/your-username/obsidian-mcp-amp-setup.git
    cd obsidian-mcp-amp-setup
    ```
 
-2. **Copy configuration:**
+3. **Copy configuration:**
    
    **Windows:**
    ```powershell
@@ -69,13 +79,13 @@ chmod +x setup.sh
    cp obsidian-config.json ~/.config/amp/mcp-config.json
    ```
 
-3. **Edit the config** and set your vault path:
+4. **Edit the config** and set your paths:
    ```json
    {
      "mcpServers": {
        "obsidian": {
-         "command": "npx",
-         "args": ["-y", "@kynlos/obsidian-mcp"],
+         "command": "node",
+         "args": ["/absolute/path/to/Obsidian-MCP/build/index.js"],
          "env": {
            "OBSIDIAN_VAULT_PATH": "/absolute/path/to/your/vault"
          }
@@ -84,9 +94,9 @@ chmod +x setup.sh
    }
    ```
 
-4. **Restart Amp**
+5. **Restart Amp**
 
-5. **Test it:**
+6. **Test it:**
    ```
    You: "Create a note in Obsidian called 'Test' with content 'Hello from Amp!'"
    ```
@@ -174,8 +184,8 @@ Single vault, simple setup:
 {
   "mcpServers": {
     "obsidian": {
-      "command": "npx",
-      "args": ["-y", "@kynlos/obsidian-mcp"],
+      "command": "node",
+      "args": ["/absolute/path/to/Obsidian-MCP/build/index.js"],
       "env": {
         "OBSIDIAN_VAULT_PATH": "/path/to/vault"
       }
@@ -191,8 +201,8 @@ Multiple vaults, debug enabled:
 {
   "mcpServers": {
     "obsidian": {
-      "command": "npx",
-      "args": ["-y", "@kynlos/obsidian-mcp"],
+      "command": "node",
+      "args": ["/absolute/path/to/Obsidian-MCP/build/index.js"],
       "env": {
         "OBSIDIAN_VAULT_PATH": "/path/to/main/vault",
         "OBSIDIAN_DEFAULT_VAULT": "MainVault",
@@ -223,10 +233,11 @@ Multiple vaults, debug enabled:
 **Solution:**
 ```bash
 # Restart Amp
-# Clear npm cache
-npx clear-npx-cache
-# Reinstall
-npm install -g @kynlos/obsidian-mcp
+# Rebuild MCP server
+cd Obsidian-MCP
+npm run build
+# Verify build/index.js exists
+ls build/index.js
 ```
 
 **[Full troubleshooting guide →](README.md#-troubleshooting)**
