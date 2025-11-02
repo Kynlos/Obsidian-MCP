@@ -37,15 +37,15 @@ Use [Amp](https://ampcode.com/) (Sourcegraph's AI coding assistant) to automatic
 
 **Windows (PowerShell):**
 ```powershell
-git clone https://github.com/your-username/obsidian-mcp-amp-setup.git
-cd obsidian-mcp-amp-setup
+git clone https://github.com/Kynlos/Obsidian-MCP.git
+cd Obsidian-MCP
 .\setup.ps1
 ```
 
 **macOS/Linux:**
 ```bash
-git clone https://github.com/your-username/obsidian-mcp-amp-setup.git
-cd obsidian-mcp-amp-setup
+git clone https://github.com/Kynlos/Obsidian-MCP.git
+cd Obsidian-MCP
 chmod +x setup.sh
 ./setup.sh
 ```
@@ -63,8 +63,8 @@ chmod +x setup.sh
 
 2. **Clone this repository:**
    ```bash
-   git clone https://github.com/your-username/obsidian-mcp-amp-setup.git
-   cd obsidian-mcp-amp-setup
+   git clone https://github.com/Kynlos/Obsidian-MCP.git
+   cd Obsidian-MCP
    ```
 
 3. **Copy configuration:**
@@ -284,7 +284,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 💬 Support
 
 - 📖 Read the [documentation](README.md)
-- 🐛 Report issues on [GitHub Issues](https://github.com/your-username/obsidian-mcp-amp-setup/issues)
+- 🐛 Report issues on [GitHub Issues](https://github.com/Kynlos/Obsidian-MCP/issues)
 - 💬 Join the discussion in Amp Discord
 
 ---
