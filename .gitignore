@@ -1,0 +1,32 @@
+# Environment variables
+.env
+
+# Personal Obsidian vaults (exclude from repo)
+BuildCrew/
+CodeSnippets/
+
+# Publishing scripts and docs (local only)
+push-to-github.py
+PUBLISH.md
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Node
+node_modules/
+package-lock.json
+
+# Logs
+*.log
+npm-debug.log*
+
+# Local configuration
+mcp-config.local.json
