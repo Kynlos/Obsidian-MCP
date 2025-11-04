@@ -1,57 +1,70 @@
-# Quick Start Guide
+# 🚀 Quickstart Guide
 
-Get Amp connected to Obsidian in 5 minutes!
+Get up and running with Obsidian MCP in under 5 minutes!
 
-## Step 1: Clone & Build Obsidian MCP Server
+## Installation
 
 ```bash
+# Clone the repository
 git clone https://github.com/Kynlos/Obsidian-MCP.git
 cd Obsidian-MCP
+
+# Install dependencies
 npm install
-npm run build
-cd ..
+
+# Run the setup wizard
+npm run setup
 ```
 
-**Note the full path** to the Obsidian-MCP directory!
+That's it! The setup wizard will:
+1. Ask for your Obsidian vault path
+2. Create configuration files
+3. Configure Amp automatically
 
-## Step 2: Run Setup Script
+## Verify Setup
 
-**Windows:**
-```powershell
-cd obsidian-mcp-amp-setup
-.\setup.ps1
-```
-
-**macOS/Linux:**
 ```bash
-cd obsidian-mcp-amp-setup
-chmod +x setup.sh
-./setup.sh
+npm test
 ```
 
-The script will ask for:
-- Path to Obsidian-MCP directory (from Step 1)
-- Path to your Obsidian vault
+## Restart Amp
 
-## Step 3: Restart Amp
+Close and reopen Amp for the changes to take effect.
 
-Close and reopen Amp.
+## Test in Amp
 
-## Step 4: Test It!
+Try these commands:
 
-In Amp, try:
 ```
-You: "Create a note in Obsidian called 'Test' with content 'Hello from Amp!'"
+You: "List my Obsidian vaults"
 ```
 
-Check your Obsidian vault - the note should appear!
+```
+You: "Create a note in Obsidian called 'Getting Started' with content 'My first note from Amp!'"
+```
 
-## ✅ You're Done!
+```
+You: "Save this code snippet to Obsidian"
+function hello() {
+  console.log("Hello from Amp!");
+}
+```
 
-Now you can:
-- Ask Amp to save code snippets
-- Document projects automatically
-- Save thread summaries
-- Build knowledge graphs
+## What's Next?
 
-**See [EXAMPLES.md](EXAMPLES.md) for more ideas!**
+- Read [EXAMPLES.md](EXAMPLES.md) for more usage examples
+- Check [README.md](README.md) for full documentation
+- Explore all available MCP tools in Amp
+
+## Troubleshooting
+
+If something doesn't work:
+
+1. Run `npm test` to check configuration
+2. Make sure you restarted Amp
+3. Check that your vault path exists
+4. See [README.md#troubleshooting](README.md#troubleshooting) for more help
+
+---
+
+**Happy note-taking! 🎉**

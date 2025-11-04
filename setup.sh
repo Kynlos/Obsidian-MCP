@@ -41,12 +41,12 @@ echo "----------------------------"
 read -p "Enter the absolute path to Obsidian-MCP directory: " MCP_PATH
 
 # Validate MCP path
-if [ ! -f "$MCP_PATH/build/index.js" ]; then
-    echo "❌ Cannot find build/index.js in $MCP_PATH"
-    echo "Please ensure you've cloned and built the Obsidian MCP server:"
+if [ ! -f "$MCP_PATH/index.js" ]; then
+    echo "❌ Cannot find index.js in $MCP_PATH"
+    echo "Please ensure you've cloned the Obsidian MCP server:"
     echo "   git clone https://github.com/Kynlos/Obsidian-MCP.git"
     echo "   cd Obsidian-MCP"
-    echo "   npm install && npm run build"
+    echo "   npm install"
     exit 1
 fi
 
@@ -97,7 +97,7 @@ cat > "$AMP_CONFIG_DIR/mcp-config.json" << EOF
     "obsidian": {
       "command": "node",
       "args": [
-        "$MCP_PATH/build/index.js"
+        "$MCP_PATH/index.js"
       ],
       "env": {
         "OBSIDIAN_VAULT_PATH": "$VAULT_PATH"
@@ -112,7 +112,7 @@ echo "✅ Created Amp MCP configuration at $AMP_CONFIG_DIR/mcp-config.json"
 # Test the configuration
 echo ""
 echo "🧪 Testing configuration..."
-if [ -f "$MCP_PATH/build/index.js" ]; then
+if [ -f "$MCP_PATH/index.js" ]; then
     echo "✅ Obsidian MCP server found and configured"
 else
     echo "⚠️  Warning: MCP server file not found at expected location"

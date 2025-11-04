@@ -3,7 +3,7 @@
     "obsidian": {
       "command": "node",
       "args": [
-        "/absolute/path/to/Obsidian-MCP/build/index.js"
+        "/absolute/path/to/Obsidian-MCP/index.js"
       ],
       "env": {
         "OBSIDIAN_VAULT_PATH": "/path/to/your/vault"
@@ -11,3 +11,24 @@
     }
   }
 }
+
+// CONFIGURATION INSTRUCTIONS:
+//
+// This file is a template for manual Amp configuration.
+// For automatic setup, run: npm run setup
+//
+// Platform-specific config locations:
+// - Windows: %APPDATA%\Amp\mcp-config.json
+// - macOS:   ~/.config/amp/mcp-config.json  
+// - Linux:   ~/.config/amp/mcp-config.json
+//
+// Replace the paths above with your actual paths:
+// 1. "/absolute/path/to/Obsidian-MCP/index.js" → actual path to index.js
+// 2. "/path/to/your/vault" → actual path to your Obsidian vault
+//
+// Path requirements:
+// - Must be absolute paths
+// - Use forward slashes (/) on all platforms
+// - Windows example: "C:/Users/Name/Documents/vault"
+// - macOS example:   "/Users/Name/Documents/vault"
+// - Linux example:   "/home/name/Documents/vault"

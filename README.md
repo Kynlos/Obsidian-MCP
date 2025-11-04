@@ -1,10 +1,6 @@
-# Obsidian MCP Setup for Amp
+# Obsidian MCP Server
 
 > **Connect your Obsidian vault to Amp and supercharge your note-taking with AI**
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Node: >=18](https://img.shields.io/badge/node-%3E%3D18-brightgreen.svg)](https://nodejs.org/)
-[![Obsidian MCP](https://img.shields.io/badge/MCP-Obsidian-purple.svg)](https://github.com/Kynlos/Obsidian-MCP)
 
 Use [Amp](https://ampcode.com/) (Sourcegraph's AI coding assistant) to automatically create, update, and manage notes in your [Obsidian](https://obsidian.md/) vault. Perfect for documentation, learning logs, code snippets, and building a knowledge base as you code.
 
@@ -26,89 +22,95 @@ Use [Amp](https://ampcode.com/) (Sourcegraph's AI coding assistant) to automatic
 
 ### Prerequisites
 
-- [Obsidian](https://obsidian.md/) installed
-- [Amp](https://ampcode.com/) installed
 - [Node.js](https://nodejs.org/) v18 or higher
-- [Obsidian MCP Server](https://github.com/Kynlos/Obsidian-MCP) cloned and built locally
+- [Amp](https://ampcode.com/) installed
+- [Obsidian](https://obsidian.md/) installed (recommended)
 
 ### Installation
 
-#### Option 1: Automated Setup (Recommended)
-
-**Windows (PowerShell):**
-```powershell
-git clone https://github.com/Kynlos/Obsidian-MCP.git
-cd Obsidian-MCP
-.\setup.ps1
-```
-
-**macOS/Linux:**
-```bash
-git clone https://github.com/Kynlos/Obsidian-MCP.git
-cd Obsidian-MCP
-chmod +x setup.sh
-./setup.sh
-```
-
-#### Option 2: Manual Setup
-
-1. **Clone and build Obsidian MCP Server:**
+1. **Clone the repository:**
    ```bash
    git clone https://github.com/Kynlos/Obsidian-MCP.git
    cd Obsidian-MCP
+   ```
+
+2. **Install dependencies:**
+   ```bash
    npm install
-   npm run build
-   cd ..
    ```
 
-2. **Clone this repository:**
+3. **Run the setup wizard:**
    ```bash
-   git clone https://github.com/Kynlos/Obsidian-MCP.git
-   cd Obsidian-MCP
-   ```
-
-3. **Copy configuration:**
-   
-   **Windows:**
-   ```powershell
-   copy obsidian-config.json %APPDATA%\Amp\mcp-config.json
+   npm run setup
    ```
    
-   **macOS/Linux:**
+   The setup wizard will:
+   - Prompt you for your Obsidian vault path
+   - Create a `.env` configuration file
+   - Configure Amp automatically for your platform (Windows/macOS/Linux)
+
+4. **Restart Amp**
+
+5. **Test it:**
    ```bash
-   cp obsidian-config.json ~/.config/amp/mcp-config.json
+   npm test
    ```
-
-4. **Edit the config** and set your paths:
-   ```json
-   {
-     "mcpServers": {
-       "obsidian": {
-         "command": "node",
-         "args": ["/absolute/path/to/Obsidian-MCP/build/index.js"],
-         "env": {
-           "OBSIDIAN_VAULT_PATH": "/absolute/path/to/your/vault"
-         }
-       }
-     }
-   }
-   ```
-
-5. **Restart Amp**
-
-6. **Test it:**
+   
+   Or in Amp:
    ```
    You: "Create a note in Obsidian called 'Test' with content 'Hello from Amp!'"
    ```
 
 ---
 
-## 📚 Documentation
+## ⚙️ Configuration
 
-- **[README.md](README.md)** - Complete setup guide and troubleshooting
-- **[EXAMPLES.md](EXAMPLES.md)** - Real-world usage examples and workflows
-- **[CONTRIBUTING.md](CONTRIBUTING.md)** - How to contribute
-- **[CHANGELOG.md](CHANGELOG.md)** - Version history
+### Automatic Setup (Recommended)
+
+Run the setup wizard to configure everything automatically:
+```bash
+npm run setup
+```
+
+### Manual Setup
+
+1. Copy `.env.example` to `.env`:
+   ```bash
+   cp .env.example .env
+   ```
+
+2. Edit `.env` and set your vault path:
+   ```env
+   OBSIDIAN_VAULT_PATH=/path/to/your/ObsidianVault
+   ```
+
+3. Configure Amp by editing the config file:
+   - **Windows:** `%APPDATA%\Amp\mcp-config.json`
+   - **macOS/Linux:** `~/.config/amp/mcp-config.json`
+
+   Add this configuration:
+   ```json
+   {
+     "mcpServers": {
+       "obsidian": {
+         "command": "node",
+         "args": ["/absolute/path/to/Obsidian-MCP/index.js"],
+         "env": {
+           "OBSIDIAN_VAULT_PATH": "/path/to/your/vault"
+         }
+       }
+     }
+   }
+   ```
+
+4. Restart Amp
+
+### Configuration Options
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `OBSIDIAN_VAULT_PATH` | Yes | Absolute path to your Obsidian vault |
+| `OBSIDIAN_DEBUG` | No | Enable debug logging (`true`/`false`) |
 
 ---
 
@@ -128,8 +130,6 @@ def fibonacci(n):
 ```
 You: "Document the architecture of this project in Obsidian"
 ```
-
-Amp will analyze your codebase and create comprehensive documentation.
 
 ### Save Thread Summaries
 
@@ -153,108 +153,89 @@ You: "Search my Obsidian notes for 'authentication patterns'"
 
 ---
 
-## 🎯 Use Cases
+## 🔧 Available Commands
 
-### For Developers
-- 📝 Document code as you write it
-- 💾 Save useful snippets for reuse
-- 🐛 Log bug fixes and solutions
-- 📚 Build a personal code library
-
-### For Learners
-- 🎓 Take notes while learning
-- 🔗 Connect concepts with links
-- 📊 Track progress over time
-- 💡 Save insights and aha moments
-
-### For Teams
-- 📋 Document meetings and decisions
-- 🔍 Share knowledge across the team
-- 🎯 Track project progress
-- 📖 Build team wikis
+| Command | Description |
+|---------|-------------|
+| `npm install` | Install dependencies |
+| `npm run setup` | Run interactive setup wizard |
+| `npm test` | Test configuration |
+| `npm start` | Start the MCP server (for debugging) |
 
 ---
 
-## 🛠️ Configuration
+## 🧪 Testing
 
-### Basic Configuration
+Verify your setup is working correctly:
 
-Single vault, simple setup:
-```json
-{
-  "mcpServers": {
-    "obsidian": {
-      "command": "node",
-      "args": ["/absolute/path/to/Obsidian-MCP/build/index.js"],
-      "env": {
-        "OBSIDIAN_VAULT_PATH": "/path/to/vault"
-      }
-    }
-  }
-}
-```
-
-### Advanced Configuration
-
-Multiple vaults, debug enabled:
-```json
-{
-  "mcpServers": {
-    "obsidian": {
-      "command": "node",
-      "args": ["/absolute/path/to/Obsidian-MCP/build/index.js"],
-      "env": {
-        "OBSIDIAN_VAULT_PATH": "/path/to/main/vault",
-        "OBSIDIAN_DEFAULT_VAULT": "MainVault",
-        "OBSIDIAN_DEBUG": "true"
-      }
-    }
-  }
-}
-```
-
-**[Full configuration guide →](README.md#-configuration-options)**
-
----
-
-## 🔧 Troubleshooting
-
-### Vault Not Found
-
-**Solution:** Ensure you're using an **absolute path** with forward slashes:
-```json
-✅ "C:/Users/Name/Documents/Vault"
-❌ "C:\Users\Name\Documents\Vault"
-❌ "./Vault"
-```
-
-### MCP Server Not Responding
-
-**Solution:**
 ```bash
-# Restart Amp
-# Rebuild MCP server
-cd Obsidian-MCP
-npm run build
-# Verify build/index.js exists
-ls build/index.js
+npm test
 ```
 
-**[Full troubleshooting guide →](README.md#-troubleshooting)**
+This will check:
+- `.env` file exists and is valid
+- Obsidian vault path is accessible
+- Amp configuration is correct
+- All dependencies are installed
+- Node.js version is compatible
+
+---
+
+## 🛠️ Troubleshooting
+
+### "OBSIDIAN_VAULT_PATH not set"
+Run `npm run setup` or manually create a `.env` file with your vault path.
+
+### "Vault directory not found"
+Ensure you're using an **absolute path** with forward slashes:
+```
+✅ C:/Users/Name/Documents/Vault
+✅ /Users/Name/Documents/Vault
+✅ /home/name/Documents/Vault
+
+❌ ./Vault (relative path)
+❌ C:\Users\Name\Documents\Vault (backslashes on Windows)
+```
+
+### MCP Not Responding in Amp
+1. Run `npm test` to verify configuration
+2. Restart Amp
+3. Check Amp logs for errors
+4. Ensure paths in Amp config match your `.env` file
+
+### Permission Errors on macOS/Linux
+Make the scripts executable:
+```bash
+chmod +x setup.js test.js index.js
+```
+
+---
+
+## 🎯 Platform Support
+
+This MCP works on:
+- ✅ **Windows** (10, 11)
+- ✅ **macOS** (10.15+)
+- ✅ **Linux** (Ubuntu, Debian, Fedora, etc.)
+
+Automatic configuration paths:
+- **Windows:** `%APPDATA%\Amp\mcp-config.json`
+- **macOS/Linux:** `~/.config/amp/mcp-config.json`
+
+---
+
+## 📚 Documentation
+
+- **[SETUP.md](SETUP.md)** - Detailed setup instructions
+- **[EXAMPLES.md](EXAMPLES.md)** - Real-world usage examples
+- **[CONTRIBUTING.md](CONTRIBUTING.md)** - How to contribute
+- **[CHANGELOG.md](CHANGELOG.md)** - Version history
 
 ---
 
 ## 🤝 Contributing
 
 Contributions are welcome! Please read our [Contributing Guide](CONTRIBUTING.md) for details.
-
-### Ways to Contribute
-
-- 📝 Improve documentation
-- 🐛 Report bugs
-- 💡 Suggest features
-- 🔧 Submit pull requests
-- 📖 Share your workflows
 
 ---
 
@@ -266,26 +247,18 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🔗 Links
 
-- **Obsidian MCP Server**: https://github.com/Kynlos/Obsidian-MCP
-- **Amp Documentation**: https://ampcode.com/manual
-- **Obsidian**: https://obsidian.md/
-- **MCP Specification**: https://modelcontextprotocol.io/
+- **Repository:** https://github.com/Kynlos/Obsidian-MCP
+- **Amp:** https://ampcode.com/
+- **Obsidian:** https://obsidian.md/
+- **MCP Specification:** https://modelcontextprotocol.io/
 
 ---
 
 ## 🙏 Acknowledgments
 
-- **Kynlos** for creating the [Obsidian MCP Server](https://github.com/Kynlos/Obsidian-MCP)
+- **Kynlos** for creating the original Obsidian MCP Server
 - **Sourcegraph** for [Amp](https://ampcode.com/)
 - **Obsidian** team for the amazing note-taking app
-
----
-
-## 💬 Support
-
-- 📖 Read the [documentation](README.md)
-- 🐛 Report issues on [GitHub Issues](https://github.com/Kynlos/Obsidian-MCP/issues)
-- 💬 Join the discussion in Amp Discord
 
 ---
 

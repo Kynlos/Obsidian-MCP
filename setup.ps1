@@ -52,13 +52,12 @@ $mcpPath = Read-Host "Enter the absolute path to Obsidian-MCP directory"
 $mcpPath = $mcpPath -replace '\\', '/'
 
 # Validate MCP path
-if (-not (Test-Path "$mcpPath/build/index.js")) {
-    Write-Host "❌ Cannot find build/index.js in $mcpPath" -ForegroundColor Red
-    Write-Host "Please ensure you've cloned and built the Obsidian MCP server:" -ForegroundColor Yellow
+if (-not (Test-Path "$mcpPath/index.js")) {
+    Write-Host "❌ Cannot find index.js in $mcpPath" -ForegroundColor Red
+    Write-Host "Please ensure you've cloned the Obsidian MCP server:" -ForegroundColor Yellow
     Write-Host "   git clone https://github.com/Kynlos/Obsidian-MCP.git" -ForegroundColor Gray
     Write-Host "   cd Obsidian-MCP" -ForegroundColor Gray
     Write-Host "   npm install" -ForegroundColor Gray
-    Write-Host "   npm run build" -ForegroundColor Gray
     exit 1
 }
 
@@ -109,7 +108,7 @@ $mcpConfig = @"
     "obsidian": {
       "command": "node",
       "args": [
-        "$mcpPath/build/index.js"
+        "$mcpPath/index.js"
       ],
       "env": {
         "OBSIDIAN_VAULT_PATH": "$vaultPath"
@@ -126,7 +125,7 @@ Write-Host "✅ Created Amp MCP configuration at $configPath" -ForegroundColor G
 # Test the configuration
 Write-Host ""
 Write-Host "🧪 Testing configuration..." -ForegroundColor Yellow
-if (Test-Path "$mcpPath/build/index.js") {
+if (Test-Path "$mcpPath/index.js") {
     Write-Host "✅ Obsidian MCP server found and configured" -ForegroundColor Green
 } else {
     Write-Host "⚠️  Warning: MCP server file not found at expected location" -ForegroundColor Yellow

@@ -9,11 +9,14 @@ import {
 import fs from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
+import dotenv from "dotenv";
 
+// Load .env file from the same directory as this script
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+dotenv.config({ path: path.join(__dirname, ".env") });
 
-const VAULTS_BASE_PATH = __dirname;
-let OBSIDIAN_VAULT_PATH = path.join(__dirname, "CodeSnippets");
+const VAULTS_BASE_PATH = process.env.OBSIDIAN_VAULT_PATH || __dirname;
+let OBSIDIAN_VAULT_PATH = process.env.OBSIDIAN_VAULT_PATH || path.join(__dirname, "CodeSnippets");
 
 class ObsidianMCPServer {
   constructor() {

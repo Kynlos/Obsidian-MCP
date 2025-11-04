@@ -4,6 +4,7 @@
 # Personal Obsidian vaults (exclude from repo)
 BuildCrew/
 CodeSnippets/
+TestVault/
 
 # Publishing scripts and docs (local only)
 push-to-github.py
