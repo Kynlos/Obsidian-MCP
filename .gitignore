@@ -5,6 +5,10 @@
 BuildCrew/
 CodeSnippets/
 TestVault/
+FeatureTest/
+
+# Backup files
+*.bak
 
 # Publishing scripts and docs (local only)
 push-to-github.py

@@ -8,13 +8,47 @@ Use [Amp](https://ampcode.com/) (Sourcegraph's AI coding assistant) to automatic
 
 ## ✨ Features
 
+### Core Features
 - 🤖 **AI-Powered Note Creation** - Let Amp create structured notes for you
 - 📝 **Code Snippet Library** - Automatically save code with syntax highlighting
 - 🧠 **Knowledge Graphs** - Build interconnected notes with automatic linking
 - 📊 **Thread Summaries** - Save your Amp conversations for future reference
-- 🔍 **Vault Search** - Ask Amp to search your existing notes
+- 🔍 **Vault Search** - Search notes by content or tags
 - 🏷️ **Smart Tagging** - Automatic categorization and organization
 - 🔗 **Cross-Referencing** - Link related notes automatically
+
+### Note Management
+- ✏️ **Update Notes** - Modify existing note content with metadata preservation
+- 🗑️ **Delete Notes** - Remove notes from your vault
+- ➕ **Append Content** - Add content to the end of existing notes
+- 📋 **Read Notes** - View full note content with formatting
+
+### Organization
+- 📁 **Create Folders** - Organize notes in directory structures
+- 🔀 **Move Notes** - Relocate notes between folders
+- 🏷️ **Rename Notes** - Change note filenames
+- 🏛️ **Multiple Vaults** - Create and switch between different vaults
+
+### Tag Management
+- ➕ **Add Tags** - Add tags to existing notes
+- ➖ **Remove Tags** - Remove specific tags from notes
+- 📊 **List All Tags** - View all unique tags across your vault
+- 🤖 **Suggest Tags** - AI-powered tag suggestions based on content
+
+### Relationships & Links
+- 🔗 **Find Backlinks** - See which notes link to a specific note
+- 🔍 **Broken Links** - Find all broken wiki-links in your vault
+
+### Daily Notes
+- 📅 **Daily Notes** - Create daily notes with customizable templates
+- ⏰ **Auto-Dating** - Automatic date-based file naming
+
+### Analytics
+- 📊 **Vault Statistics** - Get insights: note count, words, links, tags, note types
+- 📈 **Track Growth** - Monitor your knowledge base expansion
+
+### Export
+- 🌐 **HTML Export** - Convert notes to beautifully styled HTML pages
 
 ---
 
@@ -111,6 +145,64 @@ npm run setup
 |----------|----------|-------------|
 | `OBSIDIAN_VAULT_PATH` | Yes | Absolute path to your Obsidian vault |
 | `OBSIDIAN_DEBUG` | No | Enable debug logging (`true`/`false`) |
+
+---
+
+## 🛠️ Available Tools
+
+The Obsidian MCP provides 24 powerful tools for managing your notes:
+
+### Note Creation
+| Tool | Description |
+|------|-------------|
+| `save_code_snippet` | Save code snippets with syntax highlighting and metadata |
+| `save_thread_summary` | Save AI conversation summaries with key insights |
+| `save_knowledge_note` | Create general knowledge notes with tags |
+| `create_daily_note` | Create daily notes with optional custom templates |
+
+### Note Management
+| Tool | Description |
+|------|-------------|
+| `read_note` | Read the full content of a note |
+| `update_note` | Update note content (preserves metadata by default) |
+| `delete_note` | Delete a note from the vault |
+| `append_to_note` | Append content to the end of an existing note |
+| `rename_note` | Rename a note file |
+
+### Organization
+| Tool | Description |
+|------|-------------|
+| `list_notes` | List all notes (with optional tag filtering) |
+| `search_notes` | Search notes by content or tags |
+| `create_folder` | Create folders for organizing notes |
+| `move_note` | Move notes between folders |
+
+### Tag Management
+| Tool | Description |
+|------|-------------|
+| `add_tags` | Add tags to existing notes |
+| `remove_tags` | Remove specific tags from notes |
+| `list_all_tags` | Get all unique tags used across the vault |
+| `suggest_tags` | Get AI-powered tag suggestions based on content |
+
+### Vault Management
+| Tool | Description |
+|------|-------------|
+| `create_vault` | Create a new vault for organizing notes |
+| `list_vaults` | List all available vaults |
+| `switch_vault` | Switch to a different vault |
+
+### Analytics & Insights
+| Tool | Description |
+|------|-------------|
+| `vault_stats` | Get statistics (notes, words, links, tags, types) |
+| `find_backlinks` | Find all notes that link to a specific note |
+| `broken_links` | Find all broken wiki-links in the vault |
+
+### Export
+| Tool | Description |
+|------|-------------|
+| `export_note_html` | Export notes as beautifully styled HTML |
 
 ---
 
@@ -256,7 +348,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🙏 Acknowledgments
 
-- **Kynlos** for creating the original Obsidian MCP Server
+- **Kynlo** for creating the original Obsidian MCP Server
 - **Sourcegraph** for [Amp](https://ampcode.com/)
 - **Obsidian** team for the amazing note-taking app
 
