@@ -150,9 +150,9 @@ npm run setup
 
 ## 🛠️ Available Tools
 
-The Obsidian MCP provides 24 powerful tools for managing your notes:
+The Obsidian MCP provides **54 powerful tools** for complete note management:
 
-### Note Creation
+### 📝 Note Creation (4)
 | Tool | Description |
 |------|-------------|
 | `save_code_snippet` | Save code snippets with syntax highlighting and metadata |
@@ -160,7 +160,7 @@ The Obsidian MCP provides 24 powerful tools for managing your notes:
 | `save_knowledge_note` | Create general knowledge notes with tags |
 | `create_daily_note` | Create daily notes with optional custom templates |
 
-### Note Management
+### ✏️ Note Management (5)
 | Tool | Description |
 |------|-------------|
 | `read_note` | Read the full content of a note |
@@ -169,7 +169,7 @@ The Obsidian MCP provides 24 powerful tools for managing your notes:
 | `append_to_note` | Append content to the end of an existing note |
 | `rename_note` | Rename a note file |
 
-### Organization
+### 📁 Organization (4)
 | Tool | Description |
 |------|-------------|
 | `list_notes` | List all notes (with optional tag filtering) |
@@ -177,7 +177,7 @@ The Obsidian MCP provides 24 powerful tools for managing your notes:
 | `create_folder` | Create folders for organizing notes |
 | `move_note` | Move notes between folders |
 
-### Tag Management
+### 🏷️ Tag Management (4)
 | Tool | Description |
 |------|-------------|
 | `add_tags` | Add tags to existing notes |
@@ -185,24 +185,82 @@ The Obsidian MCP provides 24 powerful tools for managing your notes:
 | `list_all_tags` | Get all unique tags used across the vault |
 | `suggest_tags` | Get AI-powered tag suggestions based on content |
 
-### Vault Management
+### 🏛️ Vault Management (3)
 | Tool | Description |
 |------|-------------|
 | `create_vault` | Create a new vault for organizing notes |
 | `list_vaults` | List all available vaults |
 | `switch_vault` | Switch to a different vault |
 
-### Analytics & Insights
+### 🔍 Search & Discovery (5)
 | Tool | Description |
 |------|-------------|
-| `vault_stats` | Get statistics (notes, words, links, tags, types) |
-| `find_backlinks` | Find all notes that link to a specific note |
-| `broken_links` | Find all broken wiki-links in the vault |
+| `search_by_date` | Find notes by creation/modification date range |
+| `find_orphaned_notes` | Discover notes with no incoming or outgoing links |
+| `find_untagged_notes` | Find notes that have no tags |
+| `search_regex` | Advanced regex pattern matching across notes |
+| `search_by_word_count` | Filter notes by word count range |
 
-### Export
+### ✅ Task Management (5)
 | Tool | Description |
 |------|-------------|
+| `extract_all_todos` | Get all TODO items from across the vault |
+| `mark_task_complete` | Mark a specific task as complete |
+| `task_statistics` | Get completion rates and task analytics |
+| `create_task_note` | Create dedicated task list notes |
+| `tasks_by_tag` | Get all tasks from notes with specific tags |
+
+### 📋 Templates (3)
+| Tool | Description |
+|------|-------------|
+| `create_template` | Save reusable note templates with placeholders |
+| `apply_template` | Create notes from templates with variable substitution |
+| `list_templates` | View all available templates |
+
+### 🔗 Link Intelligence (5)
+| Tool | Description |
+|------|-------------|
+| `find_backlinks` | Find all notes that link to a specific note |
+| `suggest_links` | AI-powered internal link recommendations |
+| `create_moc` | Auto-generate Map of Content from tagged notes |
+| `link_graph` | Get network graph data of all connections |
+| `most_connected_notes` | Find hub notes with most links |
+
+### 📊 Analytics & Content Analysis (6)
+| Tool | Description |
+|------|-------------|
+| `vault_stats` | Comprehensive statistics (notes, words, links, tags, types) |
+| `broken_links` | Find all broken wiki-links in the vault |
+| `extract_links` | Get all internal and external links from a note |
+| `word_frequency` | Most frequently used words across vault |
+| `vault_timeline` | Activity timeline (daily/weekly/monthly) |
+| `note_complexity` | Readability and complexity analysis |
+
+### 🎨 Content Extraction (1)
+| Tool | Description |
+|------|-------------|
+| `extract_code_blocks` | Extract all code blocks from a note with language info |
+
+### 💾 Backup & Safety (2)
+| Tool | Description |
+|------|-------------|
+| `backup_vault` | Create timestamped backup of entire vault |
+| `list_backups` | View all available vault backups |
+
+### 🔄 Import/Export (4)
+| Tool | Description |
+|------|-------------|
+| `import_markdown_folder` | Bulk import markdown files from a folder |
 | `export_note_html` | Export notes as beautifully styled HTML |
+| `export_to_pdf` | PDF export (requires external tools) |
+| `export_vault_archive` | Create ZIP archive (requires external tools) |
+
+### 📝 Advanced Note Operations (3)
+| Tool | Description |
+|------|-------------|
+| `merge_notes` | Combine multiple notes into one |
+| `duplicate_note` | Create a copy of a note |
+| `archive_note` | Move note to Archive folder |
 
 ---
 
