@@ -150,7 +150,7 @@ npm run setup
 
 ## 🛠️ Available Tools
 
-The Obsidian MCP provides **54 powerful tools** for complete note management:
+The Obsidian MCP provides **61 powerful tools** for complete note management:
 
 ### 📝 Note Creation (4)
 | Tool | Description |
@@ -247,13 +247,20 @@ The Obsidian MCP provides **54 powerful tools** for complete note management:
 | `backup_vault` | Create timestamped backup of entire vault |
 | `list_backups` | View all available vault backups |
 
-### 🔄 Import/Export (4)
+### 🔄 Import/Export (11)
 | Tool | Description |
 |------|-------------|
 | `import_markdown_folder` | Bulk import markdown files from a folder |
 | `export_note_html` | Export notes as beautifully styled HTML |
-| `export_to_pdf` | PDF export (requires external tools) |
-| `export_vault_archive` | Create ZIP archive (requires external tools) |
+| `export_note_pdf` | **Export single note as beautifully formatted PDF** |
+| `export_note_markdown` | Export note as standalone markdown (with optional link resolution) |
+| `export_note_plaintext` | Export note as clean plain text (strips markdown) |
+| `export_vault_pdf` | **Export entire vault as single PDF with TOC, cover page, and navigation** |
+| `export_vault_json` | Export vault as structured JSON database |
+| `export_vault_csv` | Export vault index as CSV spreadsheet |
+| `export_vault_markdown_bundle` | Export complete vault copy with folder structure |
+| `export_to_pdf` | PDF export (legacy, use export_note_pdf) |
+| `export_vault_archive` | Create ZIP archive (use backup_vault) |
 
 ### 📝 Advanced Note Operations (3)
 | Tool | Description |

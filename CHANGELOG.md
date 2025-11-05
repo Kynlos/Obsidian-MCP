@@ -2,6 +2,78 @@
 
 All notable changes to the Obsidian MCP Setup for Amp will be documented in this file.
 
+## [3.1.0] - 2025-11-05
+
+### 📤 Export System Release - 7 New Export Formats
+
+**Professional export functionality for sharing and publishing your vault**
+
+#### ✨ New Export Tools (7)
+
+**Single Note Exports (3)**
+1. `export_note_pdf` - Beautiful PDF with professional styling and syntax highlighting
+2. `export_note_markdown` - Standalone markdown export with optional wiki-link resolution
+3. `export_note_plaintext` - Clean plain text export (strips all markdown formatting)
+
+**Vault-Wide Exports (4)**
+4. `export_vault_pdf` - **Stunning vault-wide PDF featuring:**
+   - Professional cover page with vault name and date
+   - Clickable table of contents with navigation
+   - Page numbers (X / Y format) in footer
+   - Each note on separate page with metadata
+   - Beautiful typography and styling
+   - Syntax-highlighted code blocks (dark theme)
+   - Print-ready A4 format
+
+5. `export_vault_json` - Complete vault as structured JSON database
+6. `export_vault_csv` - Spreadsheet index with metadata (Excel/Sheets compatible)
+7. `export_vault_markdown_bundle` - Portable vault copy preserving folder structure
+
+#### 🎨 Export Features
+
+**PDF Exports:**
+- Professional styling with custom CSS
+- Code blocks with syntax highlighting
+- Proper margins and spacing (2.5cm)
+- Header and footer support
+- Page break controls
+- Metadata display (tags, type, dates)
+- Clickable links and anchors
+- Print-ready output
+
+**Data Exports:**
+- JSON with complete vault structure
+- CSV with sortable columns
+- Timestamps and word counts
+- Tag and type categorization
+- Optional full content inclusion
+
+**Bundle Export:**
+- Preserves directory structure
+- Copies all markdown files
+- Portable and shareable
+- Ready for re-import
+
+#### 📦 Dependencies Added
+- `marked` ^16.4.1 - Markdown to HTML conversion
+- `puppeteer` ^24.29.0 - Headless Chrome for PDF generation
+- `json2csv` ^6.0.0 - CSV formatting and parsing
+
+#### 📊 Statistics
+- **Total tools:** 61 (up from 54)
+- **New export tools:** 7
+- **Export formats supported:** PDF, HTML, JSON, CSV, Markdown, Plain Text
+- **Lines added:** ~470
+
+#### 🎯 Use Cases
+- Share documentation as professional PDFs
+- Archive entire vault with cover and TOC
+- Export for analysis in Excel/Google Sheets
+- Create portable vault backups
+- Generate publication-ready documents
+- Extract plain text for processing
+- Migrate to other systems
+
 ## [3.0.0] - 2025-11-05
 
 ### 🚀 MASSIVE RELEASE - 30 Additional Features!
