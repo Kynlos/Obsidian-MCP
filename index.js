@@ -446,6 +446,457 @@ class ObsidianMCPServer {
             required: ["filename"],
           },
         },
+        {
+          name: "search_by_date",
+          description: "Find notes created or modified within a date range",
+          inputSchema: {
+            type: "object",
+            properties: {
+              start_date: {
+                type: "string",
+                description: "Start date (YYYY-MM-DD)",
+              },
+              end_date: {
+                type: "string",
+                description: "End date (YYYY-MM-DD)",
+              },
+              date_type: {
+                type: "string",
+                description: "Search by 'created' or 'modified' date",
+                enum: ["created", "modified"],
+              },
+            },
+            required: ["start_date", "end_date"],
+          },
+        },
+        {
+          name: "find_orphaned_notes",
+          description: "Find notes with no incoming or outgoing links",
+          inputSchema: {
+            type: "object",
+            properties: {},
+          },
+        },
+        {
+          name: "find_untagged_notes",
+          description: "Find notes that have no tags",
+          inputSchema: {
+            type: "object",
+            properties: {},
+          },
+        },
+        {
+          name: "search_regex",
+          description: "Search notes using regular expressions",
+          inputSchema: {
+            type: "object",
+            properties: {
+              pattern: {
+                type: "string",
+                description: "Regular expression pattern",
+              },
+              case_sensitive: {
+                type: "boolean",
+                description: "Case sensitive search (default: false)",
+              },
+            },
+            required: ["pattern"],
+          },
+        },
+        {
+          name: "search_by_word_count",
+          description: "Find notes by word count range",
+          inputSchema: {
+            type: "object",
+            properties: {
+              min_words: {
+                type: "number",
+                description: "Minimum word count",
+              },
+              max_words: {
+                type: "number",
+                description: "Maximum word count",
+              },
+            },
+            required: ["min_words", "max_words"],
+          },
+        },
+        {
+          name: "extract_all_todos",
+          description: "Extract all TODO items from all notes",
+          inputSchema: {
+            type: "object",
+            properties: {
+              include_completed: {
+                type: "boolean",
+                description: "Include completed tasks (default: false)",
+              },
+            },
+          },
+        },
+        {
+          name: "mark_task_complete",
+          description: "Mark a task as complete in a note",
+          inputSchema: {
+            type: "object",
+            properties: {
+              filename: {
+                type: "string",
+                description: "The filename containing the task",
+              },
+              task_text: {
+                type: "string",
+                description: "The text of the task to mark complete",
+              },
+            },
+            required: ["filename", "task_text"],
+          },
+        },
+        {
+          name: "task_statistics",
+          description: "Get statistics about tasks across the vault",
+          inputSchema: {
+            type: "object",
+            properties: {},
+          },
+        },
+        {
+          name: "create_task_note",
+          description: "Create a dedicated task list note",
+          inputSchema: {
+            type: "object",
+            properties: {
+              title: {
+                type: "string",
+                description: "Title for the task note",
+              },
+              tasks: {
+                type: "array",
+                items: { type: "string" },
+                description: "List of tasks",
+              },
+            },
+            required: ["title", "tasks"],
+          },
+        },
+        {
+          name: "tasks_by_tag",
+          description: "Get all tasks from notes with specific tags",
+          inputSchema: {
+            type: "object",
+            properties: {
+              tag: {
+                type: "string",
+                description: "Tag to filter tasks by",
+              },
+            },
+            required: ["tag"],
+          },
+        },
+        {
+          name: "create_template",
+          description: "Create a reusable note template",
+          inputSchema: {
+            type: "object",
+            properties: {
+              template_name: {
+                type: "string",
+                description: "Name for the template",
+              },
+              content: {
+                type: "string",
+                description: "Template content with placeholders",
+              },
+            },
+            required: ["template_name", "content"],
+          },
+        },
+        {
+          name: "apply_template",
+          description: "Create a note from a template",
+          inputSchema: {
+            type: "object",
+            properties: {
+              template_name: {
+                type: "string",
+                description: "Name of the template to use",
+              },
+              filename: {
+                type: "string",
+                description: "Filename for the new note",
+              },
+              variables: {
+                type: "object",
+                description: "Variables to replace in template (e.g., {title: 'My Note'})",
+              },
+            },
+            required: ["template_name", "filename"],
+          },
+        },
+        {
+          name: "list_templates",
+          description: "List all available templates",
+          inputSchema: {
+            type: "object",
+            properties: {},
+          },
+        },
+        {
+          name: "suggest_links",
+          description: "AI-powered suggestions for internal links",
+          inputSchema: {
+            type: "object",
+            properties: {
+              filename: {
+                type: "string",
+                description: "The filename to suggest links for",
+              },
+            },
+            required: ["filename"],
+          },
+        },
+        {
+          name: "create_moc",
+          description: "Create a Map of Content note from related notes",
+          inputSchema: {
+            type: "object",
+            properties: {
+              title: {
+                type: "string",
+                description: "Title for the MOC",
+              },
+              tag: {
+                type: "string",
+                description: "Tag to gather notes from",
+              },
+            },
+            required: ["title", "tag"],
+          },
+        },
+        {
+          name: "link_graph",
+          description: "Get graph data of note connections",
+          inputSchema: {
+            type: "object",
+            properties: {
+              max_depth: {
+                type: "number",
+                description: "Maximum depth to traverse (default: 2)",
+              },
+            },
+          },
+        },
+        {
+          name: "most_connected_notes",
+          description: "Find notes with the most connections",
+          inputSchema: {
+            type: "object",
+            properties: {
+              limit: {
+                type: "number",
+                description: "Number of notes to return (default: 10)",
+              },
+            },
+          },
+        },
+        {
+          name: "extract_links",
+          description: "Extract all links (internal and external) from a note",
+          inputSchema: {
+            type: "object",
+            properties: {
+              filename: {
+                type: "string",
+                description: "The filename to extract links from",
+              },
+            },
+            required: ["filename"],
+          },
+        },
+        {
+          name: "word_frequency",
+          description: "Get most frequently used words across vault",
+          inputSchema: {
+            type: "object",
+            properties: {
+              limit: {
+                type: "number",
+                description: "Number of words to return (default: 20)",
+              },
+              min_length: {
+                type: "number",
+                description: "Minimum word length (default: 4)",
+              },
+            },
+          },
+        },
+        {
+          name: "extract_code_blocks",
+          description: "Extract all code blocks from a note",
+          inputSchema: {
+            type: "object",
+            properties: {
+              filename: {
+                type: "string",
+                description: "The filename to extract code from",
+              },
+            },
+            required: ["filename"],
+          },
+        },
+        {
+          name: "vault_timeline",
+          description: "Get creation/modification timeline of notes",
+          inputSchema: {
+            type: "object",
+            properties: {
+              granularity: {
+                type: "string",
+                description: "Timeline granularity: 'day', 'week', 'month'",
+                enum: ["day", "week", "month"],
+              },
+            },
+          },
+        },
+        {
+          name: "note_complexity",
+          description: "Analyze note complexity and readability",
+          inputSchema: {
+            type: "object",
+            properties: {
+              filename: {
+                type: "string",
+                description: "The filename to analyze",
+              },
+            },
+            required: ["filename"],
+          },
+        },
+        {
+          name: "backup_vault",
+          description: "Create a timestamped backup of the entire vault",
+          inputSchema: {
+            type: "object",
+            properties: {
+              backup_name: {
+                type: "string",
+                description: "Optional name for the backup",
+              },
+            },
+          },
+        },
+        {
+          name: "list_backups",
+          description: "List all available vault backups",
+          inputSchema: {
+            type: "object",
+            properties: {},
+          },
+        },
+        {
+          name: "import_markdown_folder",
+          description: "Import all markdown files from a folder",
+          inputSchema: {
+            type: "object",
+            properties: {
+              source_path: {
+                type: "string",
+                description: "Path to folder containing markdown files",
+              },
+              destination_folder: {
+                type: "string",
+                description: "Optional destination folder in vault",
+              },
+            },
+            required: ["source_path"],
+          },
+        },
+        {
+          name: "export_to_pdf",
+          description: "Export a note as PDF (requires markdown-pdf)",
+          inputSchema: {
+            type: "object",
+            properties: {
+              filename: {
+                type: "string",
+                description: "The filename to export",
+              },
+              output_path: {
+                type: "string",
+                description: "Optional output path for PDF",
+              },
+            },
+            required: ["filename"],
+          },
+        },
+        {
+          name: "export_vault_archive",
+          description: "Create a ZIP archive of the entire vault",
+          inputSchema: {
+            type: "object",
+            properties: {
+              output_path: {
+                type: "string",
+                description: "Optional path for the ZIP file",
+              },
+            },
+          },
+        },
+        {
+          name: "merge_notes",
+          description: "Merge multiple notes into one",
+          inputSchema: {
+            type: "object",
+            properties: {
+              filenames: {
+                type: "array",
+                items: { type: "string" },
+                description: "Array of filenames to merge",
+              },
+              output_filename: {
+                type: "string",
+                description: "Filename for the merged note",
+              },
+              delete_originals: {
+                type: "boolean",
+                description: "Delete original notes after merge (default: false)",
+              },
+            },
+            required: ["filenames", "output_filename"],
+          },
+        },
+        {
+          name: "duplicate_note",
+          description: "Create a copy of a note",
+          inputSchema: {
+            type: "object",
+            properties: {
+              filename: {
+                type: "string",
+                description: "The filename to duplicate",
+              },
+              new_filename: {
+                type: "string",
+                description: "Filename for the duplicate",
+              },
+            },
+            required: ["filename", "new_filename"],
+          },
+        },
+        {
+          name: "archive_note",
+          description: "Move a note to the archive folder",
+          inputSchema: {
+            type: "object",
+            properties: {
+              filename: {
+                type: "string",
+                description: "The filename to archive",
+              },
+            },
+            required: ["filename"],
+          },
+        },
       ],
     }));
 
@@ -499,6 +950,66 @@ class ObsidianMCPServer {
           return await this.exportNoteHtml(request.params.arguments);
         case "suggest_tags":
           return await this.suggestTags(request.params.arguments);
+        case "search_by_date":
+          return await this.searchByDate(request.params.arguments);
+        case "find_orphaned_notes":
+          return await this.findOrphanedNotes(request.params.arguments);
+        case "find_untagged_notes":
+          return await this.findUntaggedNotes(request.params.arguments);
+        case "search_regex":
+          return await this.searchRegex(request.params.arguments);
+        case "search_by_word_count":
+          return await this.searchByWordCount(request.params.arguments);
+        case "extract_all_todos":
+          return await this.extractAllTodos(request.params.arguments);
+        case "mark_task_complete":
+          return await this.markTaskComplete(request.params.arguments);
+        case "task_statistics":
+          return await this.taskStatistics(request.params.arguments);
+        case "create_task_note":
+          return await this.createTaskNote(request.params.arguments);
+        case "tasks_by_tag":
+          return await this.tasksByTag(request.params.arguments);
+        case "create_template":
+          return await this.createTemplate(request.params.arguments);
+        case "apply_template":
+          return await this.applyTemplate(request.params.arguments);
+        case "list_templates":
+          return await this.listTemplates(request.params.arguments);
+        case "suggest_links":
+          return await this.suggestLinks(request.params.arguments);
+        case "create_moc":
+          return await this.createMoc(request.params.arguments);
+        case "link_graph":
+          return await this.linkGraph(request.params.arguments);
+        case "most_connected_notes":
+          return await this.mostConnectedNotes(request.params.arguments);
+        case "extract_links":
+          return await this.extractLinks(request.params.arguments);
+        case "word_frequency":
+          return await this.wordFrequency(request.params.arguments);
+        case "extract_code_blocks":
+          return await this.extractCodeBlocks(request.params.arguments);
+        case "vault_timeline":
+          return await this.vaultTimeline(request.params.arguments);
+        case "note_complexity":
+          return await this.noteComplexity(request.params.arguments);
+        case "backup_vault":
+          return await this.backupVault(request.params.arguments);
+        case "list_backups":
+          return await this.listBackups(request.params.arguments);
+        case "import_markdown_folder":
+          return await this.importMarkdownFolder(request.params.arguments);
+        case "export_to_pdf":
+          return await this.exportToPdf(request.params.arguments);
+        case "export_vault_archive":
+          return await this.exportVaultArchive(request.params.arguments);
+        case "merge_notes":
+          return await this.mergeNotes(request.params.arguments);
+        case "duplicate_note":
+          return await this.duplicateNote(request.params.arguments);
+        case "archive_note":
+          return await this.archiveNote(request.params.arguments);
         default:
           throw new Error(`Unknown tool: ${request.params.name}`);
       }
@@ -1606,6 +2117,1325 @@ ${bodyContent}
         content: [{
           type: "text",
           text: `Error suggesting tags: ${error.message}`,
+        }],
+        isError: true,
+      };
+    }
+  }
+
+  async searchByDate(args) {
+    const { start_date, end_date, date_type = "created" } = args;
+    
+    try {
+      const startDate = new Date(start_date);
+      const endDate = new Date(end_date);
+      const files = await fs.readdir(OBSIDIAN_VAULT_PATH);
+      const mdFiles = files.filter((f) => f.endsWith(".md"));
+      const results = [];
+
+      for (const file of mdFiles) {
+        const filepath = path.join(OBSIDIAN_VAULT_PATH, file);
+        const stats = await fs.stat(filepath);
+        const content = await fs.readFile(filepath, "utf-8");
+        
+        let dateToCheck;
+        if (date_type === "created") {
+          const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---/);
+          if (frontmatterMatch) {
+            const createdMatch = frontmatterMatch[1].match(/created:\s*(.+)/);
+            dateToCheck = createdMatch ? new Date(createdMatch[1]) : stats.birthtime;
+          } else {
+            dateToCheck = stats.birthtime;
+          }
+        } else {
+          dateToCheck = stats.mtime;
+        }
+
+        if (dateToCheck >= startDate && dateToCheck <= endDate) {
+          results.push({
+            filename: file,
+            date: dateToCheck.toISOString(),
+          });
+        }
+      }
+
+      return {
+        content: [{
+          type: "text",
+          text: JSON.stringify({
+            results: results,
+            total: results.length,
+            date_range: `${start_date} to ${end_date}`,
+            type: date_type,
+          }, null, 2),
+        }],
+      };
+    } catch (error) {
+      return {
+        content: [{
+          type: "text",
+          text: `Error searching by date: ${error.message}`,
+        }],
+        isError: true,
+      };
+    }
+  }
+
+  async findOrphanedNotes(args) {
+    try {
+      const files = await fs.readdir(OBSIDIAN_VAULT_PATH);
+      const mdFiles = files.filter((f) => f.endsWith(".md") && f !== "Welcome.md");
+      const noteNames = new Set(mdFiles.map(f => f.replace('.md', '')));
+      const orphans = [];
+
+      for (const file of mdFiles) {
+        const filepath = path.join(OBSIDIAN_VAULT_PATH, file);
+        const content = await fs.readFile(filepath, "utf-8");
+        const noteName = file.replace('.md', '');
+        
+        const outgoingLinks = content.match(/\[\[(.*?)\]\]/g) || [];
+        
+        let hasIncomingLinks = false;
+        for (const otherFile of mdFiles) {
+          if (otherFile === file) continue;
+          const otherPath = path.join(OBSIDIAN_VAULT_PATH, otherFile);
+          const otherContent = await fs.readFile(otherPath, "utf-8");
+          if (otherContent.includes(`[[${noteName}`)) {
+            hasIncomingLinks = true;
+            break;
+          }
+        }
+
+        if (outgoingLinks.length === 0 && !hasIncomingLinks) {
+          orphans.push(file);
+        }
+      }
+
+      return {
+        content: [{
+          type: "text",
+          text: JSON.stringify({
+            orphaned_notes: orphans,
+            total: orphans.length,
+          }, null, 2),
+        }],
+      };
+    } catch (error) {
+      return {
+        content: [{
+          type: "text",
+          text: `Error finding orphaned notes: ${error.message}`,
+        }],
+        isError: true,
+      };
+    }
+  }
+
+  async findUntaggedNotes(args) {
+    try {
+      const files = await fs.readdir(OBSIDIAN_VAULT_PATH);
+      const mdFiles = files.filter((f) => f.endsWith(".md"));
+      const untagged = [];
+
+      for (const file of mdFiles) {
+        const filepath = path.join(OBSIDIAN_VAULT_PATH, file);
+        const content = await fs.readFile(filepath, "utf-8");
+        const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---/);
+        
+        if (!frontmatterMatch) {
+          untagged.push(file);
+          continue;
+        }
+
+        const tagsMatch = frontmatterMatch[1].match(/tags:\s*\[(.*?)\]/);
+        if (!tagsMatch || tagsMatch[1].trim() === '') {
+          untagged.push(file);
+        }
+      }
+
+      return {
+        content: [{
+          type: "text",
+          text: JSON.stringify({
+            untagged_notes: untagged,
+            total: untagged.length,
+          }, null, 2),
+        }],
+      };
+    } catch (error) {
+      return {
+        content: [{
+          type: "text",
+          text: `Error finding untagged notes: ${error.message}`,
+        }],
+        isError: true,
+      };
+    }
+  }
+
+  async searchRegex(args) {
+    const { pattern, case_sensitive = false } = args;
+    
+    try {
+      const regex = new RegExp(pattern, case_sensitive ? 'g' : 'gi');
+      const files = await fs.readdir(OBSIDIAN_VAULT_PATH);
+      const mdFiles = files.filter((f) => f.endsWith(".md"));
+      const results = [];
+
+      for (const file of mdFiles) {
+        const filepath = path.join(OBSIDIAN_VAULT_PATH, file);
+        const content = await fs.readFile(filepath, "utf-8");
+        const matches = content.match(regex);
+        
+        if (matches && matches.length > 0) {
+          results.push({
+            filename: file,
+            matches: matches.length,
+            unique_matches: [...new Set(matches)],
+          });
+        }
+      }
+
+      return {
+        content: [{
+          type: "text",
+          text: JSON.stringify({
+            pattern: pattern,
+            results: results,
+            total_files: results.length,
+          }, null, 2),
+        }],
+      };
+    } catch (error) {
+      return {
+        content: [{
+          type: "text",
+          text: `Error searching with regex: ${error.message}`,
+        }],
+        isError: true,
+      };
+    }
+  }
+
+  async searchByWordCount(args) {
+    const { min_words, max_words } = args;
+    
+    try {
+      const files = await fs.readdir(OBSIDIAN_VAULT_PATH);
+      const mdFiles = files.filter((f) => f.endsWith(".md"));
+      const results = [];
+
+      for (const file of mdFiles) {
+        const filepath = path.join(OBSIDIAN_VAULT_PATH, file);
+        const content = await fs.readFile(filepath, "utf-8");
+        const wordCount = content.split(/\s+/).length;
+        
+        if (wordCount >= min_words && wordCount <= max_words) {
+          results.push({
+            filename: file,
+            word_count: wordCount,
+          });
+        }
+      }
+
+      results.sort((a, b) => b.word_count - a.word_count);
+
+      return {
+        content: [{
+          type: "text",
+          text: JSON.stringify({
+            range: `${min_words}-${max_words} words`,
+            results: results,
+            total: results.length,
+          }, null, 2),
+        }],
+      };
+    } catch (error) {
+      return {
+        content: [{
+          type: "text",
+          text: `Error searching by word count: ${error.message}`,
+        }],
+        isError: true,
+      };
+    }
+  }
+
+  async extractAllTodos(args) {
+    const { include_completed = false } = args || {};
+    
+    try {
+      const files = await fs.readdir(OBSIDIAN_VAULT_PATH);
+      const mdFiles = files.filter((f) => f.endsWith(".md"));
+      const todos = [];
+
+      for (const file of mdFiles) {
+        const filepath = path.join(OBSIDIAN_VAULT_PATH, file);
+        const content = await fs.readFile(filepath, "utf-8");
+        const lines = content.split('\n');
+        
+        lines.forEach((line, index) => {
+          const unchecked = line.match(/^[-*]\s+\[ \]\s+(.+)/);
+          const checked = line.match(/^[-*]\s+\[x\]\s+(.+)/i);
+          
+          if (unchecked) {
+            todos.push({
+              filename: file,
+              line: index + 1,
+              task: unchecked[1],
+              completed: false,
+            });
+          } else if (checked && include_completed) {
+            todos.push({
+              filename: file,
+              line: index + 1,
+              task: checked[1],
+              completed: true,
+            });
+          }
+        });
+      }
+
+      return {
+        content: [{
+          type: "text",
+          text: JSON.stringify({
+            todos: todos,
+            total: todos.length,
+            pending: todos.filter(t => !t.completed).length,
+            completed: todos.filter(t => t.completed).length,
+          }, null, 2),
+        }],
+      };
+    } catch (error) {
+      return {
+        content: [{
+          type: "text",
+          text: `Error extracting todos: ${error.message}`,
+        }],
+        isError: true,
+      };
+    }
+  }
+
+  async markTaskComplete(args) {
+    const { filename, task_text } = args;
+    const filepath = path.join(OBSIDIAN_VAULT_PATH, filename);
+
+    try {
+      const content = await fs.readFile(filepath, "utf-8");
+      const updatedContent = content.replace(
+        new RegExp(`^([-*]\\s+)\\[ \\]\\s+${task_text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`, 'm'),
+        `$1[x] ${task_text}`
+      );
+
+      if (content === updatedContent) {
+        return {
+          content: [{
+            type: "text",
+            text: `Task not found: "${task_text}"`,
+          }],
+          isError: true,
+        };
+      }
+
+      await fs.writeFile(filepath, updatedContent, "utf-8");
+
+      return {
+        content: [{
+          type: "text",
+          text: `Marked task complete in ${filename}: "${task_text}"`,
+        }],
+      };
+    } catch (error) {
+      return {
+        content: [{
+          type: "text",
+          text: `Error marking task complete: ${error.message}`,
+        }],
+        isError: true,
+      };
+    }
+  }
+
+  async taskStatistics(args) {
+    try {
+      const files = await fs.readdir(OBSIDIAN_VAULT_PATH);
+      const mdFiles = files.filter((f) => f.endsWith(".md"));
+      let totalPending = 0;
+      let totalCompleted = 0;
+      const tasksByFile = [];
+
+      for (const file of mdFiles) {
+        const filepath = path.join(OBSIDIAN_VAULT_PATH, file);
+        const content = await fs.readFile(filepath, "utf-8");
+        const pending = (content.match(/^[-*]\s+\[ \]/gm) || []).length;
+        const completed = (content.match(/^[-*]\s+\[x\]/gim) || []).length;
+        
+        if (pending + completed > 0) {
+          tasksByFile.push({
+            filename: file,
+            pending: pending,
+            completed: completed,
+            total: pending + completed,
+          });
+          totalPending += pending;
+          totalCompleted += completed;
+        }
+      }
+
+      return {
+        content: [{
+          type: "text",
+          text: JSON.stringify({
+            total_pending: totalPending,
+            total_completed: totalCompleted,
+            total_tasks: totalPending + totalCompleted,
+            completion_rate: totalPending + totalCompleted > 0 
+              ? Math.round((totalCompleted / (totalPending + totalCompleted)) * 100) + '%'
+              : '0%',
+            by_file: tasksByFile,
+          }, null, 2),
+        }],
+      };
+    } catch (error) {
+      return {
+        content: [{
+          type: "text",
+          text: `Error getting task statistics: ${error.message}`,
+        }],
+        isError: true,
+      };
+    }
+  }
+
+  async createTaskNote(args) {
+    const { title, tasks } = args;
+    const filename = this.sanitizeFilename(title) + ".md";
+    const filepath = path.join(OBSIDIAN_VAULT_PATH, filename);
+    const timestamp = new Date().toISOString();
+
+    const taskList = tasks.map(task => `- [ ] ${task}`).join('\n');
+    
+    const content = `---
+title: ${title}
+type: task-list
+created: ${timestamp}
+tags: ["tasks"]
+---
+
+# ${title}
+
+${taskList}
+
+---
+*Created: ${new Date(timestamp).toLocaleString()}*
+`;
+
+    try {
+      await fs.writeFile(filepath, content, "utf-8");
+
+      return {
+        content: [{
+          type: "text",
+          text: `Created task note: ${filename} with ${tasks.length} tasks`,
+        }],
+      };
+    } catch (error) {
+      return {
+        content: [{
+          type: "text",
+          text: `Error creating task note: ${error.message}`,
+        }],
+        isError: true,
+      };
+    }
+  }
+
+  async tasksByTag(args) {
+    const { tag } = args;
+    
+    try {
+      const files = await fs.readdir(OBSIDIAN_VAULT_PATH);
+      const mdFiles = files.filter((f) => f.endsWith(".md"));
+      const todos = [];
+
+      for (const file of mdFiles) {
+        const filepath = path.join(OBSIDIAN_VAULT_PATH, file);
+        const content = await fs.readFile(filepath, "utf-8");
+        
+        const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---/);
+        if (frontmatterMatch) {
+          const tagsMatch = frontmatterMatch[1].match(/tags:\s*\[(.*?)\]/);
+          if (tagsMatch) {
+            const noteTags = tagsMatch[1].split(",").map((t) => t.trim().replace(/"/g, ""));
+            if (noteTags.some(t => t.toLowerCase() === tag.toLowerCase())) {
+              const lines = content.split('\n');
+              lines.forEach((line, index) => {
+                const unchecked = line.match(/^[-*]\s+\[ \]\s+(.+)/);
+                const checked = line.match(/^[-*]\s+\[x\]\s+(.+)/i);
+                
+                if (unchecked || checked) {
+                  todos.push({
+                    filename: file,
+                    line: index + 1,
+                    task: (unchecked || checked)[1],
+                    completed: !!checked,
+                  });
+                }
+              });
+            }
+          }
+        }
+      }
+
+      return {
+        content: [{
+          type: "text",
+          text: JSON.stringify({
+            tag: tag,
+            tasks: todos,
+            total: todos.length,
+            pending: todos.filter(t => !t.completed).length,
+          }, null, 2),
+        }],
+      };
+    } catch (error) {
+      return {
+        content: [{
+          type: "text",
+          text: `Error getting tasks by tag: ${error.message}`,
+        }],
+        isError: true,
+      };
+    }
+  }
+
+  async createTemplate(args) {
+    const { template_name, content } = args;
+    const templateDir = path.join(OBSIDIAN_VAULT_PATH, '.templates');
+    const filepath = path.join(templateDir, `${this.sanitizeFilename(template_name)}.template.md`);
+
+    try {
+      await fs.mkdir(templateDir, { recursive: true });
+      await fs.writeFile(filepath, content, "utf-8");
+
+      return {
+        content: [{
+          type: "text",
+          text: `Created template: ${template_name}`,
+        }],
+      };
+    } catch (error) {
+      return {
+        content: [{
+          type: "text",
+          text: `Error creating template: ${error.message}`,
+        }],
+        isError: true,
+      };
+    }
+  }
+
+  async applyTemplate(args) {
+    const { template_name, filename, variables = {} } = args;
+    const templateDir = path.join(OBSIDIAN_VAULT_PATH, '.templates');
+    const templatePath = path.join(templateDir, `${this.sanitizeFilename(template_name)}.template.md`);
+    const outputPath = path.join(OBSIDIAN_VAULT_PATH, filename.endsWith('.md') ? filename : `${filename}.md`);
+
+    try {
+      let content = await fs.readFile(templatePath, "utf-8");
+      
+      Object.entries(variables).forEach(([key, value]) => {
+        const regex = new RegExp(`{{${key}}}`, 'g');
+        content = content.replace(regex, value);
+      });
+
+      content = content.replace(/{{date}}/g, new Date().toISOString().split('T')[0]);
+      content = content.replace(/{{datetime}}/g, new Date().toISOString());
+
+      await fs.writeFile(outputPath, content, "utf-8");
+
+      return {
+        content: [{
+          type: "text",
+          text: `Created note from template: ${filename}`,
+        }],
+      };
+    } catch (error) {
+      return {
+        content: [{
+          type: "text",
+          text: `Error applying template: ${error.message}`,
+        }],
+        isError: true,
+      };
+    }
+  }
+
+  async listTemplates(args) {
+    const templateDir = path.join(OBSIDIAN_VAULT_PATH, '.templates');
+
+    try {
+      const exists = await fs.access(templateDir).then(() => true).catch(() => false);
+      if (!exists) {
+        return {
+          content: [{
+            type: "text",
+            text: JSON.stringify({ templates: [], total: 0 }, null, 2),
+          }],
+        };
+      }
+
+      const files = await fs.readdir(templateDir);
+      const templates = files
+        .filter(f => f.endsWith('.template.md'))
+        .map(f => f.replace('.template.md', ''));
+
+      return {
+        content: [{
+          type: "text",
+          text: JSON.stringify({ templates: templates, total: templates.length }, null, 2),
+        }],
+      };
+    } catch (error) {
+      return {
+        content: [{
+          type: "text",
+          text: `Error listing templates: ${error.message}`,
+        }],
+        isError: true,
+      };
+    }
+  }
+
+  async suggestLinks(args) {
+    const { filename } = args;
+    const filepath = path.join(OBSIDIAN_VAULT_PATH, filename);
+
+    try {
+      const content = await fs.readFile(filepath, "utf-8");
+      const bodyContent = content.replace(/^---\n[\s\S]*?\n---\n/, '').toLowerCase();
+      const files = await fs.readdir(OBSIDIAN_VAULT_PATH);
+      const mdFiles = files.filter((f) => f.endsWith(".md") && f !== filename);
+      const suggestions = [];
+
+      for (const file of mdFiles) {
+        const noteName = file.replace('.md', '');
+        if (bodyContent.includes(noteName.toLowerCase()) && !content.includes(`[[${noteName}`)) {
+          const otherPath = path.join(OBSIDIAN_VAULT_PATH, file);
+          const otherContent = await fs.readFile(otherPath, "utf-8");
+          const otherWords = new Set(otherContent.toLowerCase().split(/\s+/));
+          const thisWords = new Set(bodyContent.split(/\s+/));
+          const commonWords = [...thisWords].filter(w => otherWords.has(w) && w.length > 4).length;
+          
+          suggestions.push({
+            note: noteName,
+            reason: `Name appears in text`,
+            similarity: commonWords,
+          });
+        }
+      }
+
+      suggestions.sort((a, b) => b.similarity - a.similarity);
+
+      return {
+        content: [{
+          type: "text",
+          text: JSON.stringify({
+            filename: filename,
+            suggestions: suggestions.slice(0, 10),
+            total: suggestions.length,
+          }, null, 2),
+        }],
+      };
+    } catch (error) {
+      return {
+        content: [{
+          type: "text",
+          text: `Error suggesting links: ${error.message}`,
+        }],
+        isError: true,
+      };
+    }
+  }
+
+  async createMoc(args) {
+    const { title, tag } = args;
+    const filename = this.sanitizeFilename(title) + ".md";
+    const filepath = path.join(OBSIDIAN_VAULT_PATH, filename);
+
+    try {
+      const files = await fs.readdir(OBSIDIAN_VAULT_PATH);
+      const mdFiles = files.filter((f) => f.endsWith(".md"));
+      const relatedNotes = [];
+
+      for (const file of mdFiles) {
+        const filePath = path.join(OBSIDIAN_VAULT_PATH, file);
+        const content = await fs.readFile(filePath, "utf-8");
+        const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---/);
+        
+        if (frontmatterMatch) {
+          const tagsMatch = frontmatterMatch[1].match(/tags:\s*\[(.*?)\]/);
+          if (tagsMatch) {
+            const noteTags = tagsMatch[1].split(",").map((t) => t.trim().replace(/"/g, ""));
+            if (noteTags.some(t => t.toLowerCase() === tag.toLowerCase())) {
+              const titleMatch = frontmatterMatch[1].match(/title:\s*(.+)/);
+              relatedNotes.push({
+                filename: file,
+                title: titleMatch ? titleMatch[1] : file.replace('.md', ''),
+              });
+            }
+          }
+        }
+      }
+
+      const noteLinks = relatedNotes.map(note => `- [[${note.filename.replace('.md', '')}|${note.title}]]`).join('\n');
+      
+      const content = `---
+title: ${title}
+type: moc
+created: ${new Date().toISOString()}
+tags: ["${tag}", "moc"]
+---
+
+# ${title}
+
+> A Map of Content for notes tagged with #${tag}
+
+## Notes (${relatedNotes.length})
+
+${noteLinks}
+
+---
+*This MOC was auto-generated on ${new Date().toLocaleString()}*
+`;
+
+      await fs.writeFile(filepath, content, "utf-8");
+
+      return {
+        content: [{
+          type: "text",
+          text: `Created MOC: ${filename} with ${relatedNotes.length} linked notes`,
+        }],
+      };
+    } catch (error) {
+      return {
+        content: [{
+          type: "text",
+          text: `Error creating MOC: ${error.message}`,
+        }],
+        isError: true,
+      };
+    }
+  }
+
+  async linkGraph(args) {
+    const { max_depth = 2 } = args || {};
+
+    try {
+      const files = await fs.readdir(OBSIDIAN_VAULT_PATH);
+      const mdFiles = files.filter((f) => f.endsWith(".md"));
+      const graph = { nodes: [], links: [] };
+
+      for (const file of mdFiles) {
+        const filepath = path.join(OBSIDIAN_VAULT_PATH, file);
+        const content = await fs.readFile(filepath, "utf-8");
+        const noteName = file.replace('.md', '');
+        
+        graph.nodes.push({ id: noteName, label: noteName });
+        
+        const links = content.match(/\[\[(.*?)\]\]/g) || [];
+        links.forEach(link => {
+          const target = link.slice(2, -2).split('|')[0];
+          graph.links.push({ source: noteName, target: target });
+        });
+      }
+
+      return {
+        content: [{
+          type: "text",
+          text: JSON.stringify({
+            graph: graph,
+            nodes_count: graph.nodes.length,
+            links_count: graph.links.length,
+          }, null, 2),
+        }],
+      };
+    } catch (error) {
+      return {
+        content: [{
+          type: "text",
+          text: `Error generating link graph: ${error.message}`,
+        }],
+        isError: true,
+      };
+    }
+  }
+
+  async mostConnectedNotes(args) {
+    const { limit = 10 } = args || {};
+
+    try {
+      const files = await fs.readdir(OBSIDIAN_VAULT_PATH);
+      const mdFiles = files.filter((f) => f.endsWith(".md"));
+      const connections = new Map();
+
+      for (const file of mdFiles) {
+        const filepath = path.join(OBSIDIAN_VAULT_PATH, file);
+        const content = await fs.readFile(filepath, "utf-8");
+        const noteName = file.replace('.md', '');
+        
+        const outgoing = (content.match(/\[\[.*?\]\]/g) || []).length;
+        
+        let incoming = 0;
+        for (const otherFile of mdFiles) {
+          if (otherFile === file) continue;
+          const otherPath = path.join(OBSIDIAN_VAULT_PATH, otherFile);
+          const otherContent = await fs.readFile(otherPath, "utf-8");
+          if (otherContent.includes(`[[${noteName}`)) {
+            incoming++;
+          }
+        }
+
+        connections.set(noteName, {
+          filename: file,
+          outgoing: outgoing,
+          incoming: incoming,
+          total: outgoing + incoming,
+        });
+      }
+
+      const sorted = Array.from(connections.values())
+        .sort((a, b) => b.total - a.total)
+        .slice(0, limit);
+
+      return {
+        content: [{
+          type: "text",
+          text: JSON.stringify({
+            most_connected: sorted,
+            total: sorted.length,
+          }, null, 2),
+        }],
+      };
+    } catch (error) {
+      return {
+        content: [{
+          type: "text",
+          text: `Error finding most connected notes: ${error.message}`,
+        }],
+        isError: true,
+      };
+    }
+  }
+
+  async extractLinks(args) {
+    const { filename } = args;
+    const filepath = path.join(OBSIDIAN_VAULT_PATH, filename);
+
+    try {
+      const content = await fs.readFile(filepath, "utf-8");
+      
+      const wikiLinks = content.match(/\[\[(.*?)\]\]/g) || [];
+      const internalLinks = wikiLinks.map(link => {
+        const parts = link.slice(2, -2).split('|');
+        return {
+          target: parts[0],
+          display: parts[1] || parts[0],
+        };
+      });
+
+      const externalLinks = content.match(/\[([^\]]+)\]\((https?:\/\/[^\)]+)\)/g) || [];
+      const external = externalLinks.map(link => {
+        const match = link.match(/\[([^\]]+)\]\((https?:\/\/[^\)]+)\)/);
+        return {
+          text: match[1],
+          url: match[2],
+        };
+      });
+
+      return {
+        content: [{
+          type: "text",
+          text: JSON.stringify({
+            filename: filename,
+            internal_links: internalLinks,
+            external_links: external,
+            total_internal: internalLinks.length,
+            total_external: external.length,
+          }, null, 2),
+        }],
+      };
+    } catch (error) {
+      return {
+        content: [{
+          type: "text",
+          text: `Error extracting links: ${error.message}`,
+        }],
+        isError: true,
+      };
+    }
+  }
+
+  async wordFrequency(args) {
+    const { limit = 20, min_length = 4 } = args || {};
+
+    try {
+      const files = await fs.readdir(OBSIDIAN_VAULT_PATH);
+      const mdFiles = files.filter((f) => f.endsWith(".md"));
+      const wordCounts = {};
+      const stopWords = new Set(['that', 'this', 'with', 'from', 'have', 'been', 'were', 'will', 'your', 'there', 'their', 'what', 'when', 'where', 'which', 'while', 'would', 'could', 'should']);
+
+      for (const file of mdFiles) {
+        const filepath = path.join(OBSIDIAN_VAULT_PATH, file);
+        const content = await fs.readFile(filepath, "utf-8");
+        const bodyContent = content.replace(/^---\n[\s\S]*?\n---\n/, '');
+        const words = bodyContent.toLowerCase().match(/\b[a-z]+\b/g) || [];
+        
+        words.forEach(word => {
+          if (word.length >= min_length && !stopWords.has(word)) {
+            wordCounts[word] = (wordCounts[word] || 0) + 1;
+          }
+        });
+      }
+
+      const sorted = Object.entries(wordCounts)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, limit)
+        .map(([word, count]) => ({ word, count }));
+
+      return {
+        content: [{
+          type: "text",
+          text: JSON.stringify({
+            top_words: sorted,
+            total_unique_words: Object.keys(wordCounts).length,
+          }, null, 2),
+        }],
+      };
+    } catch (error) {
+      return {
+        content: [{
+          type: "text",
+          text: `Error calculating word frequency: ${error.message}`,
+        }],
+        isError: true,
+      };
+    }
+  }
+
+  async extractCodeBlocks(args) {
+    const { filename } = args;
+    const filepath = path.join(OBSIDIAN_VAULT_PATH, filename);
+
+    try {
+      const content = await fs.readFile(filepath, "utf-8");
+      const codeBlocks = [];
+      const regex = /```(\w+)?\n([\s\S]*?)```/g;
+      let match;
+
+      while ((match = regex.exec(content)) !== null) {
+        codeBlocks.push({
+          language: match[1] || 'unknown',
+          code: match[2].trim(),
+          length: match[2].trim().split('\n').length,
+        });
+      }
+
+      return {
+        content: [{
+          type: "text",
+          text: JSON.stringify({
+            filename: filename,
+            code_blocks: codeBlocks,
+            total: codeBlocks.length,
+            by_language: codeBlocks.reduce((acc, block) => {
+              acc[block.language] = (acc[block.language] || 0) + 1;
+              return acc;
+            }, {}),
+          }, null, 2),
+        }],
+      };
+    } catch (error) {
+      return {
+        content: [{
+          type: "text",
+          text: `Error extracting code blocks: ${error.message}`,
+        }],
+        isError: true,
+      };
+    }
+  }
+
+  async vaultTimeline(args) {
+    const { granularity = 'day' } = args || {};
+
+    try {
+      const files = await fs.readdir(OBSIDIAN_VAULT_PATH);
+      const mdFiles = files.filter((f) => f.endsWith(".md"));
+      const timeline = {};
+
+      for (const file of mdFiles) {
+        const filepath = path.join(OBSIDIAN_VAULT_PATH, file);
+        const content = await fs.readFile(filepath, "utf-8");
+        const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---/);
+        
+        if (frontmatterMatch) {
+          const createdMatch = frontmatterMatch[1].match(/created:\s*(.+)/);
+          if (createdMatch) {
+            const date = new Date(createdMatch[1]);
+            let key;
+            
+            if (granularity === 'month') {
+              key = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+            } else if (granularity === 'week') {
+              const week = Math.ceil((date.getDate()) / 7);
+              key = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-W${week}`;
+            } else {
+              key = date.toISOString().split('T')[0];
+            }
+            
+            timeline[key] = (timeline[key] || 0) + 1;
+          }
+        }
+      }
+
+      const sorted = Object.entries(timeline)
+        .sort((a, b) => a[0].localeCompare(b[0]))
+        .map(([date, count]) => ({ date, notes_created: count }));
+
+      return {
+        content: [{
+          type: "text",
+          text: JSON.stringify({
+            granularity: granularity,
+            timeline: sorted,
+            total_periods: sorted.length,
+          }, null, 2),
+        }],
+      };
+    } catch (error) {
+      return {
+        content: [{
+          type: "text",
+          text: `Error generating timeline: ${error.message}`,
+        }],
+        isError: true,
+      };
+    }
+  }
+
+  async noteComplexity(args) {
+    const { filename } = args;
+    const filepath = path.join(OBSIDIAN_VAULT_PATH, filename);
+
+    try {
+      const content = await fs.readFile(filepath, "utf-8");
+      const bodyContent = content.replace(/^---\n[\s\S]*?\n---\n/, '');
+      
+      const sentences = bodyContent.split(/[.!?]+/).length;
+      const words = bodyContent.split(/\s+/).length;
+      const avgWordsPerSentence = sentences > 0 ? Math.round(words / sentences) : 0;
+      const longWords = (bodyContent.match(/\b\w{7,}\b/g) || []).length;
+      const links = (bodyContent.match(/\[\[.*?\]\]/g) || []).length;
+      const headings = (bodyContent.match(/^#+\s/gm) || []).length;
+      const codeBlocks = (bodyContent.match(/```/g) || []).length / 2;
+
+      let complexity = 'simple';
+      if (avgWordsPerSentence > 20 || longWords / words > 0.3) complexity = 'complex';
+      else if (avgWordsPerSentence > 15 || longWords / words > 0.2) complexity = 'moderate';
+
+      return {
+        content: [{
+          type: "text",
+          text: JSON.stringify({
+            filename: filename,
+            words: words,
+            sentences: sentences,
+            avg_words_per_sentence: avgWordsPerSentence,
+            long_words: longWords,
+            headings: headings,
+            links: links,
+            code_blocks: codeBlocks,
+            complexity: complexity,
+          }, null, 2),
+        }],
+      };
+    } catch (error) {
+      return {
+        content: [{
+          type: "text",
+          text: `Error analyzing complexity: ${error.message}`,
+        }],
+        isError: true,
+      };
+    }
+  }
+
+  async backupVault(args) {
+    const { backup_name } = args || {};
+    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+    const backupDir = path.join(__dirname, 'backups');
+    const backupPath = path.join(backupDir, backup_name || `backup-${timestamp}`);
+
+    try {
+      await fs.mkdir(backupDir, { recursive: true });
+      await fs.mkdir(backupPath, { recursive: true });
+
+      async function copyDir(src, dest) {
+        const entries = await fs.readdir(src, { withFileTypes: true });
+        for (const entry of entries) {
+          const srcPath = path.join(src, entry.name);
+          const destPath = path.join(dest, entry.name);
+          if (entry.isDirectory()) {
+            await fs.mkdir(destPath, { recursive: true });
+            await copyDir(srcPath, destPath);
+          } else {
+            await fs.copyFile(srcPath, destPath);
+          }
+        }
+      }
+
+      await copyDir(OBSIDIAN_VAULT_PATH, backupPath);
+
+      return {
+        content: [{
+          type: "text",
+          text: `Backup created: ${path.basename(backupPath)}`,
+        }],
+      };
+    } catch (error) {
+      return {
+        content: [{
+          type: "text",
+          text: `Error creating backup: ${error.message}`,
+        }],
+        isError: true,
+      };
+    }
+  }
+
+  async listBackups(args) {
+    const backupDir = path.join(__dirname, 'backups');
+
+    try {
+      const exists = await fs.access(backupDir).then(() => true).catch(() => false);
+      if (!exists) {
+        return {
+          content: [{
+            type: "text",
+            text: JSON.stringify({ backups: [], total: 0 }, null, 2),
+          }],
+        };
+      }
+
+      const entries = await fs.readdir(backupDir, { withFileTypes: true });
+      const backups = [];
+
+      for (const entry of entries) {
+        if (entry.isDirectory()) {
+          const stats = await fs.stat(path.join(backupDir, entry.name));
+          backups.push({
+            name: entry.name,
+            created: stats.birthtime.toISOString(),
+            size_mb: Math.round(stats.size / 1024 / 1024 * 100) / 100,
+          });
+        }
+      }
+
+      backups.sort((a, b) => b.created.localeCompare(a.created));
+
+      return {
+        content: [{
+          type: "text",
+          text: JSON.stringify({ backups: backups, total: backups.length }, null, 2),
+        }],
+      };
+    } catch (error) {
+      return {
+        content: [{
+          type: "text",
+          text: `Error listing backups: ${error.message}`,
+        }],
+        isError: true,
+      };
+    }
+  }
+
+  async importMarkdownFolder(args) {
+    const { source_path, destination_folder = '' } = args;
+
+    try {
+      const destPath = destination_folder 
+        ? path.join(OBSIDIAN_VAULT_PATH, destination_folder)
+        : OBSIDIAN_VAULT_PATH;
+
+      await fs.mkdir(destPath, { recursive: true });
+
+      const files = await fs.readdir(source_path);
+      const mdFiles = files.filter(f => f.endsWith('.md'));
+      let imported = 0;
+
+      for (const file of mdFiles) {
+        const sourcePath = path.join(source_path, file);
+        const targetPath = path.join(destPath, file);
+        await fs.copyFile(sourcePath, targetPath);
+        imported++;
+      }
+
+      return {
+        content: [{
+          type: "text",
+          text: `Imported ${imported} markdown files from ${source_path}`,
+        }],
+      };
+    } catch (error) {
+      return {
+        content: [{
+          type: "text",
+          text: `Error importing markdown folder: ${error.message}`,
+        }],
+        isError: true,
+      };
+    }
+  }
+
+  async exportToPdf(args) {
+    const { filename, output_path } = args;
+
+    return {
+      content: [{
+        type: "text",
+        text: `PDF export requires additional package. Use export_note_html instead and convert to PDF using a browser or tool.`,
+      }],
+      isError: true,
+    };
+  }
+
+  async exportVaultArchive(args) {
+    const { output_path } = args || {};
+    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+    const archiveName = `vault-export-${timestamp}.tar`;
+    const archivePath = output_path || path.join(__dirname, archiveName);
+
+    try {
+      return {
+        content: [{
+          type: "text",
+          text: `Archive export requires tar/zip package. Use backup_vault for now, which creates a full copy.`,
+        }],
+        isError: true,
+      };
+    } catch (error) {
+      return {
+        content: [{
+          type: "text",
+          text: `Error creating archive: ${error.message}`,
+        }],
+        isError: true,
+      };
+    }
+  }
+
+  async mergeNotes(args) {
+    const { filenames, output_filename, delete_originals = false } = args;
+    const outputPath = path.join(OBSIDIAN_VAULT_PATH, output_filename.endsWith('.md') ? output_filename : `${output_filename}.md`);
+
+    try {
+      let mergedContent = `---
+title: ${output_filename.replace('.md', '')}
+type: merged-note
+created: ${new Date().toISOString()}
+tags: ["merged"]
+merged_from: [${filenames.map(f => `"${f}"`).join(', ')}]
+---
+
+# ${output_filename.replace('.md', '')}
+
+`;
+
+      for (const filename of filenames) {
+        const filepath = path.join(OBSIDIAN_VAULT_PATH, filename);
+        const content = await fs.readFile(filepath, "utf-8");
+        const bodyContent = content.replace(/^---\n[\s\S]*?\n---\n/, '');
+        
+        mergedContent += `## From: ${filename.replace('.md', '')}\n\n`;
+        mergedContent += bodyContent + '\n\n---\n\n';
+      }
+
+      await fs.writeFile(outputPath, mergedContent, "utf-8");
+
+      if (delete_originals) {
+        for (const filename of filenames) {
+          await fs.unlink(path.join(OBSIDIAN_VAULT_PATH, filename));
+        }
+      }
+
+      return {
+        content: [{
+          type: "text",
+          text: `Merged ${filenames.length} notes into ${output_filename}${delete_originals ? ' (originals deleted)' : ''}`,
+        }],
+      };
+    } catch (error) {
+      return {
+        content: [{
+          type: "text",
+          text: `Error merging notes: ${error.message}`,
+        }],
+        isError: true,
+      };
+    }
+  }
+
+  async duplicateNote(args) {
+    const { filename, new_filename } = args;
+    const sourcePath = path.join(OBSIDIAN_VAULT_PATH, filename);
+    const destFilename = new_filename.endsWith('.md') ? new_filename : `${new_filename}.md`;
+    const destPath = path.join(OBSIDIAN_VAULT_PATH, destFilename);
+
+    try {
+      await fs.copyFile(sourcePath, destPath);
+
+      return {
+        content: [{
+          type: "text",
+          text: `Duplicated ${filename} to ${destFilename}`,
+        }],
+      };
+    } catch (error) {
+      return {
+        content: [{
+          type: "text",
+          text: `Error duplicating note: ${error.message}`,
+        }],
+        isError: true,
+      };
+    }
+  }
+
+  async archiveNote(args) {
+    const { filename } = args;
+    const sourcePath = path.join(OBSIDIAN_VAULT_PATH, filename);
+    const archiveDir = path.join(OBSIDIAN_VAULT_PATH, 'Archive');
+    const destPath = path.join(archiveDir, filename);
+
+    try {
+      await fs.mkdir(archiveDir, { recursive: true });
+      await fs.rename(sourcePath, destPath);
+
+      return {
+        content: [{
+          type: "text",
+          text: `Archived ${filename} to Archive folder`,
+        }],
+      };
+    } catch (error) {
+      return {
+        content: [{
+          type: "text",
+          text: `Error archiving note: ${error.message}`,
         }],
         isError: true,
       };
