@@ -4,51 +4,38 @@
 
 Use [Amp](https://ampcode.com/) (Sourcegraph's AI coding assistant) to automatically create, update, and manage notes in your [Obsidian](https://obsidian.md/) vault. Perfect for documentation, learning logs, code snippets, and building a knowledge base as you code.
 
+**🚀 Now with 121 comprehensive tools** for complete Obsidian automation!
+
 ---
 
 ## ✨ Features
 
-### Core Features
+### 🎯 What's New in v4.0
+
+- **🎨 Canvas Integration** - Create and manipulate Obsidian Canvas boards programmatically
+- **📊 Dataview Queries** - Execute database-like queries on your vault
+- **🌐 Graph Analysis** - Analyze knowledge networks, find clusters, calculate centrality
+- **🔗 Advanced URI Generation** - Create deep links to Obsidian (obsidian:// URIs)
+- **📎 Enhanced Attachments** - Better media file management
+- **🔍 Advanced Search & Replace** - Regex search, frontmatter search, vault-wide refactoring
+- **🏷️ Enhanced Metadata** - Advanced frontmatter manipulation and batch updates
+- **📚 Structured Templates** - Pre-formatted note types (books, people, meetings, projects)
+- **✅ Enhanced Task Management** - Filter by criteria, add metadata, generate reports
+- **📐 Advanced Formatting** - Callouts, tables, TOC, Mermaid diagrams, LaTeX math
+- **🔧 Vault Maintenance** - Health analysis, find duplicates, cleanup automation
+- **🔄 Cross-Note Analysis** - Compare, merge, split notes intelligently
+
+### Core Capabilities
+
 - 🤖 **AI-Powered Note Creation** - Let Amp create structured notes for you
 - 📝 **Code Snippet Library** - Automatically save code with syntax highlighting
 - 🧠 **Knowledge Graphs** - Build interconnected notes with automatic linking
 - 📊 **Thread Summaries** - Save your Amp conversations for future reference
-- 🔍 **Vault Search** - Search notes by content or tags
+- 🔍 **Vault Search** - Search notes by content, tags, metadata, regex
 - 🏷️ **Smart Tagging** - Automatic categorization and organization
 - 🔗 **Cross-Referencing** - Link related notes automatically
-
-### Note Management
-- ✏️ **Update Notes** - Modify existing note content with metadata preservation
-- 🗑️ **Delete Notes** - Remove notes from your vault
-- ➕ **Append Content** - Add content to the end of existing notes
-- 📋 **Read Notes** - View full note content with formatting
-
-### Organization
-- 📁 **Create Folders** - Organize notes in directory structures
-- 🔀 **Move Notes** - Relocate notes between folders
-- 🏷️ **Rename Notes** - Change note filenames
-- 🏛️ **Multiple Vaults** - Create and switch between different vaults
-
-### Tag Management
-- ➕ **Add Tags** - Add tags to existing notes
-- ➖ **Remove Tags** - Remove specific tags from notes
-- 📊 **List All Tags** - View all unique tags across your vault
-- 🤖 **Suggest Tags** - AI-powered tag suggestions based on content
-
-### Relationships & Links
-- 🔗 **Find Backlinks** - See which notes link to a specific note
-- 🔍 **Broken Links** - Find all broken wiki-links in your vault
-
-### Daily Notes
-- 📅 **Daily Notes** - Create daily notes with customizable templates
-- ⏰ **Auto-Dating** - Automatic date-based file naming
-
-### Analytics
-- 📊 **Vault Statistics** - Get insights: note count, words, links, tags, note types
-- 📈 **Track Growth** - Monitor your knowledge base expansion
-
-### Export
-- 🌐 **HTML Export** - Convert notes to beautifully styled HTML pages
+- 📈 **Analytics** - Vault statistics, health reports, insights
+- 💾 **Export Everything** - PDF, HTML, JSON, CSV, Markdown bundles
 
 ---
 
@@ -99,6 +86,16 @@ Use [Amp](https://ampcode.com/) (Sourcegraph's AI coding assistant) to automatic
 
 ## ⚙️ Configuration
 
+### Workspace-Relative Vaults (New!)
+
+By default, vaults are created in your **current workspace directory** - no hardcoded paths needed!
+
+```env
+# Optional: Override defaults
+VAULTS_BASE_PATH=/path/to/your/vaults/folder
+OBSIDIAN_VAULT_PATH=/path/to/your/default/vault
+```
+
 ### Automatic Setup (Recommended)
 
 Run the setup wizard to configure everything automatically:
@@ -113,12 +110,7 @@ npm run setup
    cp .env.example .env
    ```
 
-2. Edit `.env` and set your vault path:
-   ```env
-   OBSIDIAN_VAULT_PATH=/path/to/your/ObsidianVault
-   ```
-
-3. Configure Amp by editing the config file:
+2. Configure Amp by editing the config file:
    - **Windows:** `%APPDATA%\Amp\mcp-config.json`
    - **macOS/Linux:** `~/.config/amp/mcp-config.json`
 
@@ -128,39 +120,160 @@ npm run setup
      "mcpServers": {
        "obsidian": {
          "command": "node",
-         "args": ["/absolute/path/to/Obsidian-MCP/index.js"],
-         "env": {
-           "OBSIDIAN_VAULT_PATH": "/path/to/your/vault"
-         }
+         "args": ["/absolute/path/to/Obsidian-MCP/index.js"]
        }
      }
    }
    ```
 
-4. Restart Amp
-
-### Configuration Options
-
-| Variable | Required | Description |
-|----------|----------|-------------|
-| `OBSIDIAN_VAULT_PATH` | Yes | Absolute path to your Obsidian vault |
-| `OBSIDIAN_DEBUG` | No | Enable debug logging (`true`/`false`) |
+3. Restart Amp
 
 ---
 
 ## 🛠️ Available Tools
 
-The Obsidian MCP provides **61 powerful tools** for complete note management:
+The Obsidian MCP provides **121 powerful tools** organized into 14 categories:
 
-### 📝 Note Creation (4)
+### 🎨 Canvas Integration (6 tools)
+Create and manipulate Obsidian Canvas files (JSON-based visual boards).
+
 | Tool | Description |
 |------|-------------|
-| `save_code_snippet` | Save code snippets with syntax highlighting and metadata |
+| `create_canvas` | Create new canvas JSON files |
+| `add_card_to_canvas` | Add text/note/media cards to canvas |
+| `add_connection_to_canvas` | Connect cards with lines/arrows |
+| `create_canvas_group` | Group cards together |
+| `read_canvas` | Parse and read canvas structure |
+| `update_canvas_card` | Modify existing canvas cards |
+
+### 📊 Dataview Query Execution (3 tools)
+Execute database-like queries on your vault (simplified implementation).
+
+| Tool | Description |
+|------|-------------|
+| `execute_dataview_query` | Run Dataview DQL queries and return results |
+| `create_dataview_codeblock` | Insert dataview query blocks into notes |
+| `validate_dataview_query` | Check if query syntax is valid |
+
+### 🌐 Graph Analysis (5 tools)
+Analyze your knowledge network programmatically.
+
+| Tool | Description |
+|------|-------------|
+| `generate_graph_data` | Build graph structure from vault links (nodes/edges) |
+| `find_note_clusters` | Identify groups of related notes |
+| `calculate_note_centrality` | Find most connected/important notes |
+| `get_shortest_path` | Find link path between two notes |
+| `find_isolated_notes` | Notes with few/no connections |
+
+### 🔗 Advanced URI Generation (4 tools)
+Create obsidian:// deep links for automation and external integrations.
+
+| Tool | Description |
+|------|-------------|
+| `generate_obsidian_uri` | Create obsidian:// URIs for deep linking |
+| `create_workspace_uri` | Generate URI to open workspace |
+| `create_append_uri` | Generate URI to append text to note |
+| `create_search_uri` | Generate URI to search vault |
+
+### 📎 Attachments & Media Management (5 tools)
+Manage media files and attachments in your vault.
+
+| Tool | Description |
+|------|-------------|
+| `list_attachments` | List all media files in vault |
+| `attach_file` | Copy external file into vault attachments folder |
+| `delete_attachment` | Remove attachment files |
+| `find_orphaned_attachments` | Find unused media files |
+| `get_attachment_references` | Find which notes use an attachment |
+
+### 🔍 Advanced Search & Replace (4 tools)
+Powerful search and refactoring tools.
+
+| Tool | Description |
+|------|-------------|
+| `regex_search_and_replace` | Find and replace with regex across vault |
+| `search_in_frontmatter` | Search YAML frontmatter specifically |
+| `search_by_link_type` | Find specific link patterns (wiki vs markdown) |
+| `multi_file_replace` | Batch find/replace across multiple notes |
+
+### 🏷️ Enhanced Metadata/Frontmatter (6 tools)
+Advanced YAML frontmatter manipulation.
+
+| Tool | Description |
+|------|-------------|
+| `update_frontmatter_field` | Edit specific YAML field without rewriting note |
+| `batch_update_metadata` | Update property across multiple notes |
+| `validate_frontmatter_schema` | Check frontmatter against schema |
+| `list_all_properties` | Get all unique property keys in vault |
+| `rename_property_globally` | Rename property across all notes |
+| `get_property_values` | List all values for a property |
+
+### 📚 Structured Content Templates (5 tools)
+Create common note types with pre-formatted structures.
+
+| Tool | Description |
+|------|-------------|
+| `create_from_template_with_prompts` | Template with variable substitution |
+| `create_book_note` | Structured book/literature note |
+| `create_person_note` | Person/contact note structure |
+| `create_meeting_note` | Meeting notes with agenda/action items |
+| `create_project_note` | Project planning note structure |
+
+### ✅ Enhanced Task Management (5 tools)
+Advanced task data management beyond basic TODO lists.
+
+| Tool | Description |
+|------|-------------|
+| `get_tasks_by_criteria` | Filter tasks by status, date, priority, tags |
+| `move_task_between_notes` | Relocate task to different note |
+| `add_task_metadata` | Add due date, priority, tags to task |
+| `create_task_report` | Generate task summary/report |
+| `find_blocked_tasks` | Tasks waiting on dependencies |
+
+### 📐 Advanced Markdown Formatting (6 tools)
+Automate tedious formatting tasks.
+
+| Tool | Description |
+|------|-------------|
+| `convert_to_callout` | Wrap text in callout blocks |
+| `create_markdown_table` | Generate tables programmatically |
+| `add_table_of_contents` | Generate TOC from headings |
+| `create_mermaid_diagram` | Generate Mermaid diagrams from data |
+| `create_math_block` | Add LaTeX math blocks |
+| `standardize_formatting` | Fix inconsistent markdown formatting |
+
+### 🔧 Vault Maintenance (5 tools)
+Keep your vault healthy and organized.
+
+| Tool | Description |
+|------|-------------|
+| `find_duplicate_notes` | Detect similar/duplicate content |
+| `find_empty_notes` | List notes with no content |
+| `find_large_notes` | Notes exceeding size threshold |
+| `analyze_vault_health` | Overall vault statistics/issues |
+| `cleanup_broken_references` | Remove/fix broken links |
+
+### 🔄 Cross-Note Analysis (5 tools)
+Compare, refactor, and reorganize notes.
+
+| Tool | Description |
+|------|-------------|
+| `compare_notes` | Diff two notes |
+| `find_similar_notes` | Content similarity analysis |
+| `track_note_changes` | Compare note versions over time |
+| `merge_notes_enhanced` | Smart merge with options |
+| `split_note_by_headings` | Break large note into smaller ones |
+
+### 📝 Core Note Creation (4 tools)
+| Tool | Description |
+|------|-------------|
+| `save_code_snippet` | Save code with syntax highlighting and metadata |
 | `save_thread_summary` | Save AI conversation summaries with key insights |
 | `save_knowledge_note` | Create general knowledge notes with tags |
 | `create_daily_note` | Create daily notes with optional custom templates |
 
-### ✏️ Note Management (5)
+### ✏️ Core Note Management (5 tools)
 | Tool | Description |
 |------|-------------|
 | `read_note` | Read the full content of a note |
@@ -169,144 +282,51 @@ The Obsidian MCP provides **61 powerful tools** for complete note management:
 | `append_to_note` | Append content to the end of an existing note |
 | `rename_note` | Rename a note file |
 
-### 📁 Organization (4)
-| Tool | Description |
-|------|-------------|
-| `list_notes` | List all notes (with optional tag filtering) |
-| `search_notes` | Search notes by content or tags |
-| `create_folder` | Create folders for organizing notes |
-| `move_note` | Move notes between folders |
+---
 
-### 🏷️ Tag Management (4)
-| Tool | Description |
-|------|-------------|
-| `add_tags` | Add tags to existing notes |
-| `remove_tags` | Remove specific tags from notes |
-| `list_all_tags` | Get all unique tags used across the vault |
-| `suggest_tags` | Get AI-powered tag suggestions based on content |
-
-### 🏛️ Vault Management (3)
-| Tool | Description |
-|------|-------------|
-| `create_vault` | Create a new vault for organizing notes |
-| `list_vaults` | List all available vaults |
-| `switch_vault` | Switch to a different vault |
-
-### 🔍 Search & Discovery (5)
-| Tool | Description |
-|------|-------------|
-| `search_by_date` | Find notes by creation/modification date range |
-| `find_orphaned_notes` | Discover notes with no incoming or outgoing links |
-| `find_untagged_notes` | Find notes that have no tags |
-| `search_regex` | Advanced regex pattern matching across notes |
-| `search_by_word_count` | Filter notes by word count range |
-
-### ✅ Task Management (5)
-| Tool | Description |
-|------|-------------|
-| `extract_all_todos` | Get all TODO items from across the vault |
-| `mark_task_complete` | Mark a specific task as complete |
-| `task_statistics` | Get completion rates and task analytics |
-| `create_task_note` | Create dedicated task list notes |
-| `tasks_by_tag` | Get all tasks from notes with specific tags |
-
-### 📋 Templates (3)
-| Tool | Description |
-|------|-------------|
-| `create_template` | Save reusable note templates with placeholders |
-| `apply_template` | Create notes from templates with variable substitution |
-| `list_templates` | View all available templates |
-
-### 🔗 Link Intelligence (5)
-| Tool | Description |
-|------|-------------|
-| `find_backlinks` | Find all notes that link to a specific note |
-| `suggest_links` | AI-powered internal link recommendations |
-| `create_moc` | Auto-generate Map of Content from tagged notes |
-| `link_graph` | Get network graph data of all connections |
-| `most_connected_notes` | Find hub notes with most links |
-
-### 📊 Analytics & Content Analysis (6)
-| Tool | Description |
-|------|-------------|
-| `vault_stats` | Comprehensive statistics (notes, words, links, tags, types) |
-| `broken_links` | Find all broken wiki-links in the vault |
-| `extract_links` | Get all internal and external links from a note |
-| `word_frequency` | Most frequently used words across vault |
-| `vault_timeline` | Activity timeline (daily/weekly/monthly) |
-| `note_complexity` | Readability and complexity analysis |
-
-### 🎨 Content Extraction (1)
-| Tool | Description |
-|------|-------------|
-| `extract_code_blocks` | Extract all code blocks from a note with language info |
-
-### 💾 Backup & Safety (2)
-| Tool | Description |
-|------|-------------|
-| `backup_vault` | Create timestamped backup of entire vault |
-| `list_backups` | View all available vault backups |
-
-### 🔄 Import/Export (11)
-| Tool | Description |
-|------|-------------|
-| `import_markdown_folder` | Bulk import markdown files from a folder |
-| `export_note_html` | Export notes as beautifully styled HTML |
-| `export_note_pdf` | **Export single note as beautifully formatted PDF** |
-| `export_note_markdown` | Export note as standalone markdown (with optional link resolution) |
-| `export_note_plaintext` | Export note as clean plain text (strips markdown) |
-| `export_vault_pdf` | **Export entire vault as single PDF with TOC, cover page, and navigation** |
-| `export_vault_json` | Export vault as structured JSON database |
-| `export_vault_csv` | Export vault index as CSV spreadsheet |
-| `export_vault_markdown_bundle` | Export complete vault copy with folder structure |
-| `export_to_pdf` | PDF export (legacy, use export_note_pdf) |
-| `export_vault_archive` | Create ZIP archive (use backup_vault) |
-
-### 📝 Advanced Note Operations (3)
-| Tool | Description |
-|------|-------------|
-| `merge_notes` | Combine multiple notes into one |
-| `duplicate_note` | Create a copy of a note |
-| `archive_note` | Move note to Archive folder |
+**[See complete tool documentation in AGENTS.md](AGENTS.md)**
 
 ---
 
 ## 💡 Usage Examples
 
-### Save Code Snippets
+### Create a Canvas Board
 
 ```
-You: "Save this Python function to Obsidian with tags: python, utils"
-
-def fibonacci(n):
-    return n if n <= 1 else fibonacci(n-1) + fibonacci(n-2)
+You: "Create a canvas called 'Project Planning' and add cards for Frontend, Backend, and Database"
 ```
 
-### Document Your Code
+### Execute Dataview Query
 
 ```
-You: "Document the architecture of this project in Obsidian"
+You: "Show me all notes tagged with 'python' created this month"
 ```
 
-### Save Thread Summaries
+### Generate Obsidian URIs
 
 ```
-You: "Save a summary of our conversation about authentication to Obsidian"
+You: "Create a link I can use to open my Daily Note from outside Obsidian"
 ```
 
-### Build a Knowledge Base
+### Analyze Vault Structure
 
 ```
-You: "Create a note about React hooks and link it to my existing React notes"
+You: "Show me the most connected notes in my vault and find any isolated notes"
 ```
 
-### Search Your Notes
+### Create Structured Notes
 
 ```
-You: "Search my Obsidian notes for 'authentication patterns'"
+You: "Create a book note for 'The Pragmatic Programmer' by Andy Hunt and Dave Thomas"
 ```
 
-**[See more examples →](EXAMPLES.md)**
+### Advanced Formatting
+
+```
+You: "Create a Mermaid flowchart showing the authentication process and add it to my Security note"
+```
+
+**[See 50+ more examples →](EXAMPLES.md)**
 
 ---
 
@@ -330,7 +350,7 @@ npm test
 ```
 
 This will check:
-- `.env` file exists and is valid
+- `.env` file exists and is valid  
 - Obsidian vault path is accessible
 - Amp configuration is correct
 - All dependencies are installed
@@ -338,33 +358,15 @@ This will check:
 
 ---
 
-## 🛠️ Troubleshooting
+## 📊 Version History
 
-### "OBSIDIAN_VAULT_PATH not set"
-Run `npm run setup` or manually create a `.env` file with your vault path.
+- **v4.0.0** (2025-11-13) - **MAJOR UPDATE**: Added 59 new tools (Canvas, Dataview, Graph Analysis, URIs, and much more!)
+- **v3.1.0** - Export features (PDF, HTML, JSON, CSV)
+- **v3.0.0** - Template system and advanced search
+- **v2.0.0** - Task management and analytics
+- **v1.0.0** - Initial release
 
-### "Vault directory not found"
-Ensure you're using an **absolute path** with forward slashes:
-```
-✅ C:/Users/Name/Documents/Vault
-✅ /Users/Name/Documents/Vault
-✅ /home/name/Documents/Vault
-
-❌ ./Vault (relative path)
-❌ C:\Users\Name\Documents\Vault (backslashes on Windows)
-```
-
-### MCP Not Responding in Amp
-1. Run `npm test` to verify configuration
-2. Restart Amp
-3. Check Amp logs for errors
-4. Ensure paths in Amp config match your `.env` file
-
-### Permission Errors on macOS/Linux
-Make the scripts executable:
-```bash
-chmod +x setup.js test.js index.js
-```
+**[See full changelog →](CHANGELOG.md)**
 
 ---
 
@@ -383,6 +385,7 @@ Automatic configuration paths:
 
 ## 📚 Documentation
 
+- **[AGENTS.md](AGENTS.md)** - Complete tool reference for AI agents
 - **[SETUP.md](SETUP.md)** - Detailed setup instructions
 - **[EXAMPLES.md](EXAMPLES.md)** - Real-world usage examples
 - **[CONTRIBUTING.md](CONTRIBUTING.md)** - How to contribute

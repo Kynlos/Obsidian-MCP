@@ -2,6 +2,139 @@
 
 All notable changes to the Obsidian MCP Setup for Amp will be documented in this file.
 
+## [4.0.0] - 2025-11-13
+
+### 🚀 MAJOR RELEASE - 59 New Tools Added!
+
+**The Obsidian MCP now has 121 comprehensive tools** (previously 61)
+
+This is the largest update ever, adding powerful automation capabilities across 12 new/enhanced categories.
+
+#### 🎨 Canvas Integration (6 NEW tools)
+- `create_canvas` - Create new canvas JSON files
+- `add_card_to_canvas` - Add text/note/media cards to canvas
+- `add_connection_to_canvas` - Connect cards with lines/arrows
+- `create_canvas_group` - Group cards together
+- `read_canvas` - Parse and read canvas structure
+- `update_canvas_card` - Modify existing canvas cards
+
+**Impact:** Programmatically create and manipulate Obsidian Canvas boards for visual documentation and planning.
+
+#### 📊 Dataview Query Execution (3 NEW tools)
+- `execute_dataview_query` - Run Dataview DQL queries and return results
+- `create_dataview_codeblock` - Insert dataview query blocks into notes
+- `validate_dataview_query` - Check if query syntax is valid
+
+**Impact:** Execute database-like queries on your vault, generate dynamic content.
+
+#### 🌐 Graph Analysis (5 NEW tools)
+- `generate_graph_data` - Build graph structure from vault links (nodes/edges)
+- `find_note_clusters` - Identify groups of related notes
+- `calculate_note_centrality` - Find most connected/important notes
+- `get_shortest_path` - Find link path between two notes
+- `find_isolated_notes` - Notes with few/no connections
+
+**Impact:** Programmatically analyze your knowledge network structure.
+
+#### 🔗 Advanced URI Generation (4 NEW tools)
+- `generate_obsidian_uri` - Create obsidian:// URIs for deep linking
+- `create_workspace_uri` - Generate URI to open workspace
+- `create_append_uri` - Generate URI to append text to note
+- `create_search_uri` - Generate URI to search vault
+
+**Impact:** Create clickable links that open Obsidian to specific locations - great for external integrations.
+
+#### 📎 Attachments & Media Management (5 NEW tools)
+- `list_attachments` - List all media files in vault
+- `attach_file` - Copy external file into vault attachments folder
+- `delete_attachment` - Remove attachment files
+- `find_orphaned_attachments` - Find unused media files
+- `get_attachment_references` - Find which notes use an attachment
+
+**Impact:** Better management of media-rich vaults.
+
+#### 🔍 Advanced Search & Replace (4 NEW tools)
+- `regex_search_and_replace` - Find and replace with regex across vault
+- `search_in_frontmatter` - Search YAML frontmatter specifically
+- `search_by_link_type` - Find specific link patterns (wiki vs markdown)
+- `multi_file_replace` - Batch find/replace across multiple notes
+
+**Impact:** Vault-wide refactoring and maintenance capabilities.
+
+#### 🏷️ Enhanced Metadata/Frontmatter (6 NEW tools)
+- `update_frontmatter_field` - Edit specific YAML field without rewriting note
+- `batch_update_metadata` - Update property across multiple notes
+- `validate_frontmatter_schema` - Check frontmatter against schema
+- `list_all_properties` - Get all unique property keys in vault
+- `rename_property_globally` - Rename property across all notes
+- `get_property_values` - List all values for a property
+
+**Impact:** Treat your vault like a structured database with advanced metadata operations.
+
+#### 📚 Structured Content Templates (5 NEW tools)
+- `create_from_template_with_prompts` - Template with variable substitution
+- `create_book_note` - Structured book/literature note
+- `create_person_note` - Person/contact note structure
+- `create_meeting_note` - Meeting notes with agenda/action items
+- `create_project_note` - Project planning note structure
+
+**Impact:** Quick creation of common note types with pre-formatted structures.
+
+#### ✅ Enhanced Task Management (5 NEW tools)
+- `get_tasks_by_criteria` - Filter tasks by status, date, priority, tags
+- `move_task_between_notes` - Relocate task to different note
+- `add_task_metadata` - Add due date, priority, tags to task
+- `create_task_report` - Generate task summary/report
+- `find_blocked_tasks` - Tasks waiting on dependencies
+
+**Impact:** Advanced task data management beyond basic TODO lists.
+
+#### 📐 Advanced Markdown Formatting (6 NEW tools)
+- `convert_to_callout` - Wrap text in callout blocks
+- `create_markdown_table` - Generate tables programmatically
+- `add_table_of_contents` - Generate TOC from headings
+- `create_mermaid_diagram` - Generate Mermaid diagrams from data
+- `create_math_block` - Add LaTeX math blocks
+- `standardize_formatting` - Fix inconsistent markdown formatting
+
+**Impact:** Automate tedious formatting tasks.
+
+#### 🔧 Vault Maintenance (5 NEW tools)
+- `find_duplicate_notes` - Detect similar/duplicate content
+- `find_empty_notes` - List notes with no content
+- `find_large_notes` - Notes exceeding size threshold
+- `analyze_vault_health` - Overall vault statistics/issues
+- `cleanup_broken_references` - Remove/fix broken links
+
+**Impact:** Keep your vault healthy, organized, and optimized.
+
+#### 🔄 Cross-Note Analysis (5 NEW tools)
+- `compare_notes` - Diff two notes
+- `find_similar_notes` - Content similarity analysis
+- `track_note_changes` - Compare note versions over time
+- `merge_notes_enhanced` - Smart merge with options
+- `split_note_by_headings` - Break large note into smaller ones
+
+**Impact:** Compare, refactor, and reorganize notes intelligently.
+
+### 🛠️ Improvements
+
+- **Workspace-Relative Vaults:** Vaults now created in current workspace by default (no hardcoded paths)
+- **Better Path Handling:** Uses `process.cwd()` for workspace-aware behavior
+- **Enhanced Testing:** All 121 tools tested and verified
+
+### 📚 Documentation
+
+- Complete README overhaul with all 121 tools documented
+- Updated AGENTS.md with comprehensive tool reference
+- New examples for Canvas, Dataview, Graph Analysis, and more
+
+### 🔧 Breaking Changes
+
+- None! All existing tools remain unchanged and backward compatible
+
+---
+
 ## [3.1.0] - 2025-11-05
 
 ### 📤 Export System Release - 7 New Export Formats
