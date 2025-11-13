@@ -833,8 +833,10 @@ await export_vault_pdf({
 ## Technical Details
 
 ### Vault Path
-- Configured via `OBSIDIAN_VAULT_PATH` environment variable
-- All operations are relative to the active vault
+- **`VAULTS_BASE_PATH`**: Base directory where new vaults are created (defaults to current working directory)
+- **`OBSIDIAN_VAULT_PATH`**: The currently active vault path (defaults to `VAULTS_BASE_PATH/CodeSnippets`)
+- All file operations use the active vault (`OBSIDIAN_VAULT_PATH`)
+- New vaults are created under `VAULTS_BASE_PATH`
 - Can switch vaults with `switch_vault`
 
 ### File Naming

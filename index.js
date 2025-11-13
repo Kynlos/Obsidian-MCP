@@ -18,8 +18,11 @@ import { parse } from "json2csv";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 dotenv.config({ path: path.join(__dirname, ".env") });
 
-const VAULTS_BASE_PATH = process.env.OBSIDIAN_VAULT_PATH || __dirname;
-let OBSIDIAN_VAULT_PATH = process.env.OBSIDIAN_VAULT_PATH || path.join(__dirname, "CodeSnippets");
+// Support workspace-relative vaults
+// VAULTS_BASE_PATH: where to create new vaults (defaults to current working directory)
+// OBSIDIAN_VAULT_PATH: the currently active vault
+const VAULTS_BASE_PATH = process.env.VAULTS_BASE_PATH || process.cwd();
+let OBSIDIAN_VAULT_PATH = process.env.OBSIDIAN_VAULT_PATH || path.join(VAULTS_BASE_PATH, "CodeSnippets");
 
 class ObsidianMCPServer {
   constructor() {

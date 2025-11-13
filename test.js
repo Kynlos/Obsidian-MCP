@@ -52,13 +52,11 @@ async function test() {
       if (await fileExists(vaultPath)) {
         console.log('✅ Vault directory exists');
       } else {
-        console.log('❌ Vault directory not found');
-        hasErrors = true;
+        console.log('⚠️  Vault directory not found (will be created on first use)');
       }
     } else {
-      console.log('❌ OBSIDIAN_VAULT_PATH not set in .env');
-      console.log('   Edit .env and set: OBSIDIAN_VAULT_PATH=/path/to/vault');
-      hasErrors = true;
+      console.log('✅ Using workspace-relative vaults (dynamic based on working directory)');
+      console.log('   Vaults will be created in the directory where Amp is running');
     }
   } else {
     console.log('❌ .env file not found');
